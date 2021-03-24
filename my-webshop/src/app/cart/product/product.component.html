@@ -1,25 +1,41 @@
+<div class="container" style="background-color: #7290AC;">
+    <div class="row">
+        <div class="col-sm-2 "style=" background-color:#425D77">
+            <h4 style="color:white"> Price Range</h4>
+            <h6 style="color:white">Fra</h6>
+            <input type="text"
+            class="form-control-md"
+            [(ngModel)]="priceRangeFrom">
+            <p>{{priceRangeFrom}}</p>
+            <h5 style="color:white">To</h5>
+            <input type="text"
+            class="form-control-md"
+            [(ngModel)]="priceRangeTo">
+            <p>{{priceRangeTo}}</p>
+       
+            <button type="button" class="btn">Filter</button>
+            <br>
+            <br>
+        </div>
 
-<p>product works!</p>
-<div>
-    <div style=" background-color:blue">    
-        <h4 style="color:white"> Price Range</h4>
-        <h6 style="color:white">Fra</h6>
-        <input type="text">
-
-        <h5 style="color:white">To</h5>
-        <input type="text">
+        <div class="d-flex justify-content-around">
+        <div class="col-sm-2">
+            <div>
+            Container Right
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div>
+                Container Right
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div>
+                Container Right
+            </div>
+        </div>
     </div>
-    <div>
-        <h3>Hello</h3>
+        
     </div>
 </div>
 
-<div class="col">
-    1 of 3
-  </div>
-  <div class="col-md-auto">
-    Variable width content
-  </div>
-  <div class="col col-lg-2">
-    3 of 3
-  </div>
