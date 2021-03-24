@@ -12,6 +12,13 @@
                 <li><a href="#">Clothes</a></li>
                 <!--<li><a href="#">Sign Up</a></li>-->
             </ul>
+            
+           <ul> <input type="text"
+            class="form-control"
+            (input)="onUpdateServerName($event)">
+            <p>{{clotheName}}</p>
+            </ul>
+
             <ul class="nav navbar-nav navbar-right ">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle " role="button ">Sign Up/Log In<span class="caret"></span></a>

@@ -6,4 +6,10 @@ import { Component } from "@angular/core";
 })
 export class HeaderComponent{
     collapsed = true;
+    clotheName = '';
+    onUpdateServerName(event: any){
+        this.clotheName = (event.target as HTMLInputElement).value;
+
+    }
 }
+
