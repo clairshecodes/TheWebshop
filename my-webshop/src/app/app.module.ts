@@ -12,6 +12,10 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentComponent } from './checkout/payment/payment.component';
 import { ConfirmationComponent } from './checkout/confirmation/confirmation.component';
 
+import { FormsModule } from '@angular/forms';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,10 +28,13 @@ import { ConfirmationComponent } from './checkout/confirmation/confirmation.comp
     AddCartComponent,
     CheckoutComponent,
     PaymentComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+
+
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
