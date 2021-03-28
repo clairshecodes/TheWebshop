@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styles: [
-  ]
+  styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+  myImage:string = "assets/image/sweatshirt.jpg";
   priceRangeFrom = '50kr';
   priceRangeTo = '5000kr';
   constructor() { }
+  
 
   ngOnInit(): void {
   }
@@ -19,5 +20,4 @@ export class ProductComponent implements OnInit {
 onUpdatePriceTo(event: any){
   this.priceRangeTo = (event.target as HTMLInputElement).value;
 }
-
 }

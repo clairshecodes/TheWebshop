@@ -1,6 +1,6 @@
-<div class="container" style="background-color: #7290AC;">
+<div class="container" >
     <div class="row">
-        <div class="col-sm-2 "style=" background-color:#425D77">
+        <div class="col-sm-2 col_price"style=" background-color:#425D77">
             <h4 style="color:white"> Price Range</h4>
             <h6 style="color:white">Fra</h6>
             <input type="text"
@@ -18,24 +18,31 @@
             <br>
         </div>
 
-        <div class="d-flex justify-content-around">
-        <div class="col-sm-2">
-            <div>
-            Container Right
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div>
+        <div class="col-sm-3 col_left text-center " style=" background-color:#425D77" >
+            <div style="color:white">
+                <h4 >Sweatshirt</h4>
+                <img [src]="myImage" alt="" width="220" height="234">
                 Container Right
             </div>
         </div>
-        <div class="col-sm-2">
-            <div>
+
+        <div class=" col-sm-3 col_middle text-center" style=" background-color:#425D77">
+            <div style="color:white">
+                <h4 >Sweatshirt</h4>
+                <img [src]="myImage" alt="" width="220" height="234">
                 Container Right
             </div>
         </div>
-    </div>
-        
+        <div class="col-sm-3 col_right text-center" style=" background-color:#425D77">
+            <div style="color:white">
+                <h4 >Sweatshirt</h4>
+                <!--<img src="/product/sweatshirt.jpg" alt="Clothing - Sweatshirt" width="500" height="600">
+                <img [src]="myImage" alt="">-->
+                <img [src]="myImage" alt="" width="220" height="234">
+                
+                Container Right
+            </div>
+        </div> 
     </div>
 </div>
 
