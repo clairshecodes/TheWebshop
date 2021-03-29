@@ -9,6 +9,7 @@ export class ProductComponent implements OnInit {
   myImage:string = "assets/image/sweatshirt.jpg";
   priceRangeFrom = '50kr';
   priceRangeTo = '5000kr';
+  pricing = "something kr.";
   constructor() { }
   
 
@@ -19,5 +20,9 @@ export class ProductComponent implements OnInit {
 }
 onUpdatePriceTo(event: any){
   this.priceRangeTo = (event.target as HTMLInputElement).value;
+}
+onUpdatePricing(event: any){
+  this.pricing = (event.target as HTMLInputElement).value;
+
 }
 }
