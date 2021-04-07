@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Product} from './product.model';
 
 @Component({
   selector: 'app-product',
@@ -10,6 +11,11 @@ export class ProductComponent implements OnInit {
   priceRangeFrom = '50kr';
   priceRangeTo = '5000kr';
   pricing = "something kr.";
+  products: Product[] = [
+    new Product('Sweatshirty', 'So this is a warm sweatshirt and good at winter'
+    , 'https://www.kids-world.dk/images/417px/JX179.jpg' )
+  ];
+
   constructor() { }
   
 
