@@ -12,17 +12,16 @@
             class="form-control-md"
             [(ngModel)]="priceRangeTo">
             <p>{{priceRangeTo}}</p>
-       
             <button type="button" class="btn">Filter</button>
             <br>
             <br>
         </div>
 
-        <div class="col-sm-3 col_left text-center " style=" background-color:#425D77" >
+        <div class="col-sm-3 col_left text-center" *ngFor="let product of products" style=" background-color:#425D77">
             <div style="color:white">
-                <h4 >Sweatshirt</h4>
+                <h4 >{{product.name}}</h4>
                 <img [src]="myImage" alt="" width="220" height="234">
-                Container Right
+                {{product.description}}
                 <p>{{pricing}}</p>
                 <button type="button" class="btn" style="color:black">Add to cart</button>
                 <br>
@@ -32,7 +31,7 @@
 
         <div class=" col-sm-3 col_middle text-center" style=" background-color:#425D77">
             <div style="color:white">
-                <h4 >Sweatshirt</h4>
+                <h4 >{{product.name}}</h4>
                 <img [src]="myImage" alt="" width="220" height="234">
                 Container Right
                 <p>{{pricing}}</p>
@@ -43,7 +42,7 @@
         </div>
         <div class="col-sm-3 col_right text-center" style=" background-color:#425D77">
             <div style="color:white">
-                <h4 >Sweatshirt</h4>
+                <h4 >{{product.name}}</h4>
                 <!--<img src="/product/sweatshirt.jpg" alt="Clothing - Sweatshirt" width="500" height="600">
                 <img [src]="myImage" alt="">-->
                 <img [src]="myImage" alt="" width="220" height="234">
