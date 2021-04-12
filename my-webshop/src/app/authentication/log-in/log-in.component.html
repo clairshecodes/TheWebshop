@@ -1,1 +1,30 @@
-<p>log-in works!</p>
+
+<div class="container">
+ <div class="row">
+   <div class="col-md-12">
+     <h2>Login</h2>
+    <form>
+       <div class="form-group">
+         <label>Username</label>
+         <input type="text" name="username" [(ngModel)]="username"
+                style="border: 1px solid #cccccc; display: block; " placeholder="Your username">
+       </div>
+       <div class="input">
+         <label>Password</label>
+         <input type="password" name="password" [(ngModel)]="password"
+                style="border: 1px solid #cccccc; display: block;" placeholder="Your password">
+       </div>
+       <div class="form-group" style="margin: 10px 0">
+         <button class="btn btn-primary" (click)="loginUser()">
+           <span class="spinner-border" spinner-border-sm mr-1></span>
+           Login
+         </button>
+         <a routerLink="/signup" class="btn btn-link" style="cursor: pointer">Register</a>
+       </div>
+     </form>
+   </div>
+ </div>
+</div>
+
+
+
