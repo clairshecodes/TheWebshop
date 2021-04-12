@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HeaderComponent} from './header/header.component'
+import {HttpClientModule} from "@angular/common/http";
+import {HeaderComponent} from './header/header.component';
 import {AppComponent} from './app.component';
 import {AuthenticationComponent} from './authentication/authentication.component';
 import {SignUpComponent} from './authentication/sign-up/sign-up.component';
@@ -12,8 +13,8 @@ import {CheckoutComponent} from './checkout/checkout.component';
 import {PaymentComponent} from './checkout/payment/payment.component';
 import {ConfirmationComponent} from './checkout/confirmation/confirmation.component';
 
-import {FormsModule} from '@angular/forms';
-import {AppRoutingModule} from "./app-routing.module";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AppRoutingModule} from './app-routing.module';
 
 
 @NgModule({
@@ -35,7 +36,9 @@ import {AppRoutingModule} from "./app-routing.module";
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

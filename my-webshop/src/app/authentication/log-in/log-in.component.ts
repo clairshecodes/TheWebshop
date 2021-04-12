@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-log-in',
@@ -17,8 +16,9 @@ export class LogInComponent implements OnInit {
   }
 
   loginUser() {
-    if (this.username === "Admin" && this.password === "Admin1234") {
-      console.log("Welcome to our webshop!");
+    if (this.username === "Mads" && this.password === "Admin1234") {
+      //console.log("Welcome to our webshop!");
+      alert("Welcome to FrontEnd Course with " + this.username);
     }
   }
 }
