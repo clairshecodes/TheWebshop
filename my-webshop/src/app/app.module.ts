@@ -13,6 +13,7 @@ import { PaymentComponent } from './checkout/payment/payment.component';
 import { ConfirmationComponent } from './checkout/confirmation/confirmation.component';
 
 import { FormsModule } from '@angular/forms';
+import { MainComponent } from './main/main.component';
 
 
 
@@ -29,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     CheckoutComponent,
     PaymentComponent,
     ConfirmationComponent,
+    MainComponent,
 
 
   ],

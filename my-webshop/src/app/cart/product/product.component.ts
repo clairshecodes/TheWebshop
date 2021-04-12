@@ -12,7 +12,7 @@ export class ProductComponent implements OnInit {
   priceRangeTo = '5000kr';
   pricing = "something kr.";
   products: Product[] = [
-    new Product('Sweatshirty', 'So this is a warm sweatshirt and good at winter'
+    new Product('Sweatshirt', 'So this is a warm sweatshirt and good at winter'
     , 'https://www.kids-world.dk/images/417px/JX179.jpg' )
   ];
 
