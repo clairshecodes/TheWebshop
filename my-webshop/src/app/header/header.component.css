@@ -2,7 +2,7 @@ nav.navi {
     background-color: #425D77;
 }
 a{
-  color: white;
+  color: black;
 }
 
 @media (min-width: 768px) {
@@ -27,3 +27,4 @@ a{
 .navbar-default{
   border-color:#425D77
 }
+

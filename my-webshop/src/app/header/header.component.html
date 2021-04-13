@@ -1,4 +1,4 @@
-<nav class="navi navbar navbar-default" role="navigation">
+<nav class="navi nav-tabs">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
       <span class="icon-bar"></span>
@@ -8,12 +8,12 @@
   </div>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
-      <li><a class="text-white bg-dark" href="#" routerLinkActive="active">JaDes_Design</a></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a class="text-white bg-dark" style="cursor: pointer" routerLink="/">JaDes_Design</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li routerLinkActive="active"><a routerLink="/product" style="cursor: pointer">Cart</a></li>
-      <li routerLinkActive="active"><a style="cursor: pointer">Clothes</a></li>
-      <li routerLinkActive="active"><a routerLink="/login" style="cursor: pointer">Login</a></li>
+      <li><a routerLink="/product" style="cursor: pointer" routerLinkActive="active">Cart</a></li>
+      <li><a style="cursor: pointer" routerLinkActive="active">Clothes</a></li>
+      <li><a routerLink="/login" style="cursor: pointer" routerLinkActive="active">Login</a></li>
     </ul>
     <form class="navbar-form navbar-center" role="search">
       <div class="input-group">
