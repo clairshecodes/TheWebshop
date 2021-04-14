@@ -15,6 +15,7 @@ import {Routes, RouterModule} from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { ItemComponent } from './cart/item/item.component';
+import {FilterPipe} from './filter.pipe';
 const appRoutes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
   {path: 'cart', component: CartComponent},
@@ -38,8 +39,7 @@ const appRoutes: Routes = [
     ConfirmationComponent,
     MainComponent,
     ItemComponent,
-
-
+    FilterPipe
   ],
   imports: [
     BrowserModule,

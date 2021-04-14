@@ -1,12 +1,15 @@
 .col_middle{
     margin-right: 10px;
     margin-left:10px;
+    margin-top: 20px;
 }
 
 .col_left{
-    margin-left: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
-.row{
-    margin-left: 5px;
+.col_price{
+    margin-left:20px;
+    margin-top: 20px;
 }

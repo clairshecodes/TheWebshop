@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import {Options} from './header.model';
 
 @Component({
     selector: 'app-header',
@@ -11,7 +12,9 @@ export class HeaderComponent{
     clothesName = 'Search';
     onUpdateServerName(event: any){
         this.clothesName = (event.target as HTMLInputElement).value;
-
     }
+    options: Options[] = [
+        new Options('Sweatshirt'), new Options('Jackets'), new Options('Skirts'), new Options('Dresses')
+      ];
 }
 
