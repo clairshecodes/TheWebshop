@@ -11,10 +11,16 @@ import { AddCartComponent } from './cart/add-cart/add-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentComponent } from './checkout/payment/payment.component';
 import { ConfirmationComponent } from './checkout/confirmation/confirmation.component';
-
+import {Routes, RouterModule} from "@angular/router";
 import { FormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
-
+import { ItemComponent } from './cart/item/item.component';
+const appRoutes: Routes = [
+  {path: 'checkout', component: CheckoutComponent},
+  {path: 'cart', component: CartComponent},
+  {path: 'authentication', component: AuthenticationComponent},
+  {path: 'main', component: MainComponent}
+];
 
 
 @NgModule({
@@ -31,12 +37,14 @@ import { MainComponent } from './main/main.component';
     PaymentComponent,
     ConfirmationComponent,
     MainComponent,
+    ItemComponent,
 
 
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

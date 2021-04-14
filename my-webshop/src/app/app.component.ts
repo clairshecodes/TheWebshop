@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-webshop';
+  collapsed = true;
+  clothName = 'Search';
+  onUpdateServerName(event: any){
+      this.clothName = (event.target as HTMLInputElement).value;
+
+  }
   
 }
