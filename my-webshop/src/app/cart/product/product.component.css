@@ -1,8 +1,12 @@
 .col_middle{
-    margin-right: 25px;
-    margin-left: 25px;
+    margin-right: 10px;
+    margin-left:10px;
 }
 
 .col_left{
-    margin-left: 25px;
+    margin-left: 10px;
+}
+
+.row{
+    margin-left: 5px;
 }

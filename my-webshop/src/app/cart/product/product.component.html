@@ -1,6 +1,5 @@
-<div class="container" style=" background-color:#7290AC">
-  
-  <div class="row">
+
+  <div class="row" style=" background-color:#7290AC">
     <br>
     <div class="col-sm-2 col_price" style=" background-color:#425D77">
       
@@ -20,7 +19,7 @@
       <br>
     </div>
 <div>
-  <div  *ngFor="let product of products">
+  <div  *ngFor="let product of products; let i = index">
     <br>
         <div class="col-sm-3 col_left text-center" 
          style=" background-color:#425D77">
@@ -38,7 +37,6 @@
       <div style="color:white">
         <h4>{{product.name}}</h4>
         <img [src]="myImage" alt="" width="220" height="234">
-        
         <p class="text-left">{{product.desc}}</p>
         <button type="button" class="btn" style="color:black">Add to cart</button>
         <br>
@@ -55,7 +53,10 @@
         <br>
       </div>
     </div>
+    </div>
+    <br>
   </div>
+  <br>
   </div>
-</div>
+
 

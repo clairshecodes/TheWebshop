@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from './product.model';
+import {Names} from './product.model';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,7 @@ export class ProductComponent implements OnInit {
   pricing = "something kr.";
   products: Product[] = [
 
-    new Product('Sweatshirty', 'So this is a warm sweatshirt and good at winter'
+    new Product('Sweatshirt', 'So this is a warm sweatshirt and good at winter'
       , 'https://www.kids-world.dk/images/417px/JX179.jpg'), 
       new Product('Sweatshirty', 'So this is a warm sweatshirt and good at winter'
       , 'https://www.kids-world.dk/images/417px/JX179.jpg'), 
@@ -21,6 +22,11 @@ export class ProductComponent implements OnInit {
       , 'https://www.kids-world.dk/images/417px/JX179.jpg'),
       new Product('Sweatshirt', 'So this is a warm sweatshirt and good at winter'
       , 'https://www.kids-world.dk/images/417px/JX179.jpg')
+
+  ];
+
+  names: Names[] = [
+    new Names('J', 'James', 'Jared')
 
   ];
 
