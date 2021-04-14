@@ -1,60 +1,61 @@
-<div class="container" >
-    <div class="row">
-        <div class="col-sm-2 col_price"style=" background-color:#425D77">
-            <h4 style="color:white"> Price Range</h4>
-            <h6 style="color:white">Fra</h6>
-            <input type="text"
-            class="form-control-md"
-            [(ngModel)]="priceRangeFrom">
-            <p>{{priceRangeFrom}}</p>
-            <h5 style="color:white">To</h5>
-            <input type="text"
-            class="form-control-md"
-            [(ngModel)]="priceRangeTo">
-            <p>{{priceRangeTo}}</p>
-            <button type="button" class="btn">Filter</button>
-            <br>
-            <br>
-        </div>
-
-        <div class="col-sm-3 col_left text-center" *ngFor = "let i of products"
-         style=" background-color:#425D77">
-            <div style="color:white">
-                <h4>{{i.products}}</h4>
-                <img [src]="myImage" alt="" width="220" height="234">
-                Container right
-                <p>{{pricing}}</p>
-                <button type="button" class="btn" style="color:black">Add to cart</button>
-                <br>
-                <br>
-            </div>
-        </div>
-
-        <div class=" col-sm-3 col_middle text-center" style=" background-color:#425D77">
-            <div style="color:white">
-                <h4 >Sweatshirt</h4>
-                <img [src]="myImage" alt="" width="220" height="234">
-                Container Right
-                <p>{{pricing}}</p>
-                <button type="button" class="btn" style="color:black">Add to cart</button>
-                <br>
-                <br>
-            </div>
-        </div>
-        <div class="col-sm-3 col_right text-center" style=" background-color:#425D77">
-            <div style="color:white">
-                <h4 >Sweatshirt</h4>
-                <!--<img src="/product/sweatshirt.jpg" alt="Clothing - Sweatshirt" width="500" height="600">
-                <img [src]="myImage" alt="">-->
-                <img [src]="myImage" alt="" width="220" height="234">
-                
-                Container Right
-                <p>{{pricing}}</p>
-                <button type="button" class="btn" style="color:black">Add to cart</button>
-                <br>
-                <br>
-            </div>
-        </div> 
+<div class="container" style=" background-color:#7290AC">
+  
+  <div class="row">
+    <br>
+    <div class="col-sm-2 col_price" style=" background-color:#425D77">
+      
+      <h4 style="color:white"> Price Range</h4>
+      <h6 style="color:white">Fra</h6>
+      <input type="text"
+             class="form-control-md"
+             [(ngModel)]="priceRangeFrom">
+      <p>{{priceRangeFrom}}</p>
+      <h5 style="color:white">To</h5>
+      <input type="text"
+             class="form-control-md"
+             [(ngModel)]="priceRangeTo">
+      <p>{{priceRangeTo}}</p>
+      <button type="button" class="btn">Filter</button>
+      <br>
+      <br>
     </div>
+<div>
+  <div  *ngFor="let product of products">
+    <br>
+        <div class="col-sm-3 col_left text-center" 
+         style=" background-color:#425D77">
+            <div class="rounded mx-auto d-block" style="color:white">
+                <h4>{{product.name}}</h4>
+                <img [src]="myImage" alt="" width="220" height="234">
+                <p>{{product.desc}}</p>
+                <button type="button" class="btn" style="color:black">Add to cart</button>
+                
+            </div>
+            <br>
+        </div>
+    
+    <div class="col-sm-3 col_left text-center" style=" background-color:#425D77">
+      <div style="color:white">
+        <h4>{{product.name}}</h4>
+        <img [src]="myImage" alt="" width="220" height="234">
+        
+        <p class="text-left">{{product.desc}}</p>
+        <button type="button" class="btn" style="color:black">Add to cart</button>
+        <br>
+        <br>
+      </div>
+    </div>
+    <div class=" col-sm-3 col_middle text-center" style=" background-color:#425D77">
+      <div style="color:white">
+        <h4>{{product.name}}</h4>
+        <img [src]="myImage" alt="" width="220" height="234">
+        <p>{{product.desc}}</p>
+        <button type="button" class="btn" style="color:black">Add to cart</button>
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+  </div>
 </div>
 
