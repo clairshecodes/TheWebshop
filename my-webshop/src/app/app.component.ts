@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+
 import {Options} from './header/header.model';
 
 @Component({
@@ -15,16 +16,16 @@ export class AppComponent {
     'Jackets',
     'Dresses',
     'Co-Ords'
-  ]
+  ];
   collapsed = true;
   searchText = 'Search';
-  onUpdateServerName(event: any){
+
+  onUpdateServerName(event: any) {
     this.clothesName = (event.target as HTMLInputElement).value;
-}
-options: Options[] = [
+  }
+
+  options: Options[] = [
     new Options('Sweatshirt'), new Options('Jackets'), new Options('Skirts'), new Options('Dresses')
   ];
 }
-
-  
 
