@@ -1,25 +1,37 @@
 <form (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <h2>Register</h2>
-    <label>First Name</label>
+    <h1>New Account</h1>
+    <p><label>First Name</label>*</p>
     <input type="text" formControlName="firstName" class="form-control"/>
     <div class="invalid-feedback">
     </div>
   </div>
   <div class="form-group">
-    <label>Last Name</label>
+    <p><label>Last Name</label>*</p>
     <input type="text" formControlName="lastName" class="form-control"/>
     <div class="invalid-feedback">
     </div>
   </div>
   <div class="form-group">
-    <label>Username</label>
+    <p><label>Birthday</label>(optional)</p>
+    <input type="date" formControlName="username" class="form-control"/>
+    <div class="invalid-feedback">
+    </div>
+  </div>
+  <div class="form-group">
+    <p><label>E-mail</label>*</p>
+    <input type="email" formControlName="username" class="form-control"/>
+    <div class="invalid-feedback">
+    </div>
+  </div>
+  <div class="form-group">
+    <p><label>Username</label>*</p>
     <input type="text" formControlName="username" class="form-control"/>
     <div class="invalid-feedback">
     </div>
   </div>
   <div class="form-group">
-    <label>Password</label>
+    <p><label>Password</label>*</p>
     <input type="password" formControlName="password" class="form-control"
            placeholder="Password must be at least 6 characters"/>
     <div class="invalid-feedback">
@@ -33,3 +45,6 @@
     <a routerLink="/login" class="btn btn-link">Cancel</a>
   </div>
 </form>
+
+
+

@@ -15,6 +15,7 @@ import {ConfirmationComponent} from './checkout/confirmation/confirmation.compon
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
+import { MaterialComponent } from './material/material.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {AppRoutingModule} from './app-routing.module';
     CheckoutComponent,
     PaymentComponent,
     ConfirmationComponent,
+    MaterialComponent,
 
 
   ],

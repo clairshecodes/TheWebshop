@@ -2,6 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
+export interface DialogData {
+  userName: string;
+  passWord: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -49,6 +54,7 @@ export class AppComponent implements OnInit {
         console.log(posts);
       });
   }
+
 }
 
 
