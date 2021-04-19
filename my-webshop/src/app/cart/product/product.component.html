@@ -19,8 +19,8 @@
       <br>
     </div>
 <div>
-  <div  *ngFor="let product of names" >
-        <div class="col-sm-3  col_left text-center "  *ngFor="let i of names"
+  <div *ngFor="let product of names" >
+        <div class="col-sm-3  col_left text-center "  *ngFor="let i of names" 
          style=" background-color:#425D77">
           <div class="rounded mx-auto d-block" style="color:white">
             <h4>{{i.name}}</h4>
@@ -28,13 +28,13 @@
             [src]="i.imagePath" alt="{{i.imagePath}}" style="width: 220px; height:234px"
             >
             <div class="content">
-              <h4>{{i.price}}</h4>
+              <h4>Price: {{i.price}}kr.</h4>
               <p>{{i.des}}</p>
               <button type="button" class="btn" (click)="inc(i)" style="color:black"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></button>
               <span>  {{i.qnt}}  </span>
               <button type="button" class="btn" (click)="dec(i)" style="color:black"><i class="glyphicon glyphicon-minus" aria-hidden="true"></i></button>
               <br>
-              <button  type="button" class="cart-btn" (click)="addCart(i)" style="color:black">Add to cart</button>
+              <button  type="button" class="cart-btn" (click)="addToCart(i)" style="color:black">Add to cart</button>
             </div>    
           </div>
           <br>

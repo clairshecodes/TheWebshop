@@ -19,8 +19,8 @@ import {FilterPipe} from './filter.pipe';
 const appRoutes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
   {path: 'cart', component: CartComponent},
+  {path: 'main', component: MainComponent},
   {path: 'authentication', component: AuthenticationComponent},
-  {path: 'main', component: MainComponent}
 ];
 
 
