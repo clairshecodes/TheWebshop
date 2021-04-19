@@ -43,9 +43,9 @@ export class UserService {
         return this.userUpdated.asObservable()
     }
     addUser(inputuser:User){
-        this.http.post<{message: string , userID:string}>('http://localhost:3000/api/users',inputuser)
+        this.http.post<{user : User}>('http://localhost:3000/api/users',inputuser)
         .subscribe((resData)=>{
-            const userID = resData.userID
+            const userID = resData.user.id
             inputuser.id=userID
             this.users.push(inputuser)
             this.userUpdated.next([...this.users])
@@ -53,7 +53,7 @@ export class UserService {
 
     }
 
-    deleteProduct(userId : string){
+    deleteUser(userId : string){
         this.http.delete('http://localhost:3000/api/products' + userId)
         .subscribe(()=>{
             const updateUsers=this.users.filter(user =>user.id !== userId)
@@ -62,7 +62,7 @@ export class UserService {
         })
     }
 
-    getProduct(id : string){
+    getUser(id : string){
         return{...this.users.find(p=>p.id === id)}
     }
 }
