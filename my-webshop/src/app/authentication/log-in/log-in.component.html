@@ -1,36 +1,33 @@
 <p>log-in works!</p>
-<form>
-  <div class="form-group">
-    <h2>Register</h2>
-    <label>First Name</label>
-    <input type="text" formControlName="firstName" class="form-control"/>
-    <div class="invalid-feedback">
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Last Name</label>
-    <input type="text" formControlName="lastName" class="form-control"/>
-    <div class="invalid-feedback">
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Username</label>
-    <input type="text" formControlName="username" class="form-control"/>
-    <div class="invalid-feedback">
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" formControlName="password" class="form-control"
-           placeholder="Password must be at least 6 characters"/>
-    <div class="invalid-feedback">
-    </div>
-  </div>
-  <div class="form-group">
-    <button class="btn btn-primary">
-      <span></span>
-      Register
+<mat-card>
+  <form (submit)="loginUser(loginForm)" #loginForm="ngForm">
+    <mat-form-field class="example-full-width">
+      <mat-label>email</mat-label>
+      <input matInput
+       placeholder="input your email" 
+       name="email"
+       required
+       minlength="1"
+       [ngModel]='user.email'
+       #entereTitle="ngModel">
+      <mat-error *ngIf="entereTitle.invalid">Enter an email</mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>password</mat-label>
+      <input matInput
+       placeholder="input your password" 
+       name="password"
+       required
+       minlength="1"
+       [ngModel]='user.passwordHash'
+       #entereTitle="ngModel">
+      <mat-error *ngIf="entereTitle.invalid">Enter an password</mat-error>
+    </mat-form-field>
+    <hr/>
+    <button mat-icon-button
+    type="submit"  	>
+      <mat-icon>login</mat-icon>
     </button>
-    <a routerLink="/login" class="btn btn-link">Cancel</a>
-  </div>
-</form>
+  </form>
+</mat-card>
+
