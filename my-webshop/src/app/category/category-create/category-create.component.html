@@ -1,0 +1,46 @@
+<h1>
+  Categories
+</h1>
+<mat-card> 
+    <form (submit)="onAddCat(catForm)" #catForm="ngForm">
+      
+    <mat-form-field class="example-full-width">
+      <mat-label>name</mat-label>
+      <input matInput
+       placeholder="what ever you want" 
+       name="entereName"
+       required
+       minlength="1"
+       [ngModel]='category.name'
+       #entereTitle="ngModel">
+      <mat-error *ngIf="entereTitle.invalid">Eneter a name</mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>icon</mat-label>
+        <input matInput
+         placeholder="what ever you want" 
+         name="enteredIcon"
+         required
+         minlength="1"
+         [ngModel]='category.icon'
+         #entereTitle="ngModel">
+        <mat-error *ngIf="entereTitle.invalid">Eneter an icon</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>color</mat-label>
+        <input matInput
+         placeholder="what ever you want" 
+         name="enteredColor"
+         required
+         minlength="1"
+         [ngModel]='category.color'
+         #entereTitle="ngModel">
+        <mat-error *ngIf="entereTitle.invalid">Eneter a color</mat-error>
+      </mat-form-field>
+  <hr/>
+  <button mat-icon-button
+  type="submit"	
+    >
+    <mat-icon>add</mat-icon></button>
+    </form>
+  </mat-card>
