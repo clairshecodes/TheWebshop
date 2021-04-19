@@ -1,0 +1,55 @@
+
+<mat-card> 
+    <form (submit)="onAddProduct(postForm)" #postForm="ngForm">
+      
+    <mat-form-field class="example-full-width">
+      <mat-label>title</mat-label>
+      <input matInput
+       placeholder="enter the name of item" 
+       name="enteredTitle"
+       required
+       minlength="1"
+       [ngModel]='product.title'
+       #entereTitle="ngModel">
+      <mat-error *ngIf="entereTitle.invalid">Eneter a title</mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+          <mat-label>Leave description</mat-label>
+          <textarea class="broad" 
+          name="enteredDescription"
+          minlength="1"
+          required
+          [ngModel]='product.description'
+          #enteredDescription="ngModel"
+          matInput placeholder="this Item" 
+          rows="8">
+          </textarea>
+          <mat-error *ngIf="enteredDescription.invalid">Eneter a content</mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>price:</mat-label>
+      <input class="broad" 
+      name="enteredPrice"
+      minlength="1"
+      required
+      [ngModel]='product.price'
+      #enteredPrice="ngModel"
+      matInput placeholder="Ex. It makes me feel..." 
+      />
+    
+      <mat-error *ngIf="enteredPrice.invalid">Eneter a content</mat-error>
+  </mat-form-field>
+        
+      
+  <hr/>
+  <button mat-icon-button
+  type="submit"	
+    >
+    <mat-icon>add</mat-icon></button>
+    </form>
+  </mat-card>
+  
+  
+  
+  
+  

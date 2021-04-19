@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import { NgForm } from '@angular/forms'
+
+import {UserService} from '../../models/services/user.service'
+import {User} from '../../models/user.model'
 
 @Component({
   selector: 'app-log-in',
@@ -8,17 +12,25 @@ import {Component, OnInit} from '@angular/core';
 export class LogInComponent implements OnInit {
   username: string;
   password: string;
+  userId : string
+ user :User;
+  
 
-  constructor() {
+  constructor(public userService: UserService) { 
+    this.userId=''
+    this.user = new User()
   }
 
   ngOnInit(): void {
   }
 
-  loginUser() {
-    if (this.username === "Mads" && this.password === "Admin1234") {
-      //console.log("Welcome to our webshop!");
-      alert("Welcome to FrontEnd Course with " + this.username);
-    }
+  loginUser(form :NgForm) {
+    if(form.invalid)
+        {return}
+    const email = form.value.email
+    const password = form.value.password
+    const res =this.userService.loginUser(email, password)
+    console.log(res)
   }
+ 
 }

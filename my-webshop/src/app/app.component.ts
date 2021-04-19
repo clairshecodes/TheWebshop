@@ -20,12 +20,11 @@ export class AppComponent {
   collapsed = true;
   searchText = 'Search';
 
-  onUpdateServerName(event: any) {
-    this.clothesName = (event.target as HTMLInputElement).value;
-  }
-
   options: Options[] = [
     new Options('Sweatshirt'), new Options('Jackets'), new Options('Skirts'), new Options('Dresses')
   ];
-}
 
+  onUpdateServerName(event: any) {
+    this.clothesName = (event.target as HTMLInputElement).value;
+  }
+}
