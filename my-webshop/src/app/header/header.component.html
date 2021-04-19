@@ -1,29 +1,30 @@
-<nav class="navi nav-tabs">
+<nav class="navi navbar navbar-default" role="navigation">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
-    </button>
+    </button>    
   </div>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-left">
-      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a class="text-white bg-dark" style="cursor: pointer" routerLink="/">JaDes_Design</a></li>
+        <li><a class="text-white bg-dark" href="/main">JaDes Design</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a routerLink="/product" style="cursor: pointer" routerLinkActive="active">Cart</a></li>
-      <li><a style="cursor: pointer" routerLinkActive="active">Clothes</a></li>
-      <li><a routerLink="/login" style="cursor: pointer" routerLinkActive="active">Login</a></li>
+      <li><a routerLink="/checkout">Cart 1</a></li>
+        <li><a routerLink="/cart">Clothes</a></li>
+        <li><a href="#">Log In</a></li>
     </ul>
     <form class="navbar-form navbar-center" role="search">
       <div class="input-group">
-        <input type="text" class="form-control" name="srch-term" id="srch-term"
-               [(ngModel)]="clothesName">
-
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-        </div>
+          <input  type="text" class="form-control" name="srch-term" id="srch-term"
+          [(ngModel)]="clothesName">
+          
+          <div class="input-group-btn">
+              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+          </div>
       </div>
-    </form>
+      </form>
+      <router-outlet></router-outlet>
   </div>
 </nav>

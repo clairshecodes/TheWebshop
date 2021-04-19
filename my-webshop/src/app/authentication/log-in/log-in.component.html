@@ -1,29 +1,36 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Login</h2>
-      <form>
-        <div class="form-group">
-          <label>Username</label>
-          <input type="text" name="username" [(ngModel)]="username"
-                 style="border: 1px solid #cccccc; display: block; " placeholder="Your username">
-        </div>
-        <div class="input">
-          <label>Password</label>
-          <input type="password" name="password" [(ngModel)]="password"
-                 style="border: 1px solid #cccccc; display: block;" placeholder="Your password">
-        </div>
-        <div class="form-group" style="margin: 10px 0">
-          <button class="btn btn-primary" (click)="loginUser()">
-            <span class="spinner-border spinner-border-sm mr-1" ></span>
-            Login
-          </button>
-          <a routerLink="/signup" class="btn btn-link" style="cursor: pointer">New Customer?</a>
-        </div>
-      </form>
+<p>log-in works!</p>
+<form>
+  <div class="form-group">
+    <h2>Register</h2>
+    <label>First Name</label>
+    <input type="text" formControlName="firstName" class="form-control"/>
+    <div class="invalid-feedback">
     </div>
   </div>
-</div>
-
-
-
+  <div class="form-group">
+    <label>Last Name</label>
+    <input type="text" formControlName="lastName" class="form-control"/>
+    <div class="invalid-feedback">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" formControlName="username" class="form-control"/>
+    <div class="invalid-feedback">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" formControlName="password" class="form-control"
+           placeholder="Password must be at least 6 characters"/>
+    <div class="invalid-feedback">
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary">
+      <span></span>
+      Register
+    </button>
+    <a routerLink="/login" class="btn btn-link">Cancel</a>
+  </div>
+</form>

@@ -1,7 +1,9 @@
-<div class="container">
-  <div class="row">
+
+<div class="row" style=" background-color:#7290AC">
+
     <div class="col-sm-2 col_price" style=" background-color:#425D77">
-      <h4 style="color:white"> Pris Interval</h4>
+      
+      <h4 style="color:white"> Price Range</h4>
       <h6 style="color:white">Fra</h6>
       <input type="text"
              class="form-control-md"
@@ -16,44 +18,56 @@
       <br>
       <br>
     </div>
-
-    <div class="col-sm-3 col_left text-center" *ngFor="let product of products" style=" background-color:#425D77">
-      <div style="color:white">
-        <h4>{{ product.name }}</h4>
-        <img [src]="myImage" alt="" width="220" height="234">
-        {{ product.description }}
-        <p>{{ pricing }}</p>
-        <button type="button" class="btn" style="color:black">Add to cart</button>
-        <br>
-        <br>
+<div>
+  <div  *ngFor="let product of names" >
+        <div class="col-sm-3  col_left text-center "  *ngFor="let i of names"
+         style=" background-color:#425D77">
+          <div class="rounded mx-auto d-block" style="color:white">
+            <h4>{{i.name}}</h4>
+            <img
+            [src]="i.imagePath" alt="{{i.imagePath}}" style="width: 220px; height:234px"
+            >
+            <div class="content">
+              <h4>{{i.price}}</h4>
+              <p>{{i.des}}</p>
+              <button type="button" class="btn" (click)="inc(i)" style="color:black"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></button>
+              <span>  {{i.qnt}}  </span>
+              <button type="button" class="btn" (click)="dec(i)" style="color:black"><i class="glyphicon glyphicon-minus" aria-hidden="true"></i></button>
+              <br>
+              <button  type="button" class="cart-btn" (click)="addCart(i)" style="color:black">Add to cart</button>
+            </div>    
+          </div>
+          <br>
+        </div>
+        <!--
+        <div  class="col-sm-3 col_left text-center" style=" background-color:#425D77"  *ngFor="let i of names">
+          <div style="color:white">
+            <h4 class="left">{{i.name}}</h4>
+            <img
+            [src]="i.imagePath" alt="{{i.imagePath}}" style="width: 220px; height:234px"
+            >
+            <p>{{i.des}}</p>
+            <button type="button" class="btn" style="color:black">Add to cart</button>
+            <br>
+            <br>
+          </div>
+        </div>
+        <div class=" col-sm-3 col_middle text-center" style=" background-color:#425D77" *ngFor="let i of names">
+          <div style="color:white">
+          <h4>{{i.name}}</h4>
+          <img
+          [src]="i.imagePath" alt="{{i.imagePath}}" style="width: 220px; height:234px"
+          >
+          <p>{{i.des}}</p>
+          <button type="button" class="btn" style="color:black">Add to cart</button>
+          <br>
+          <br>
+        </div>
       </div>
+      -->
     </div>
-
-    <div class=" col-sm-3 col_middle text-center" style=" background-color:#425D77">
-      <div style="color:white">
-        <h4>{{ products }}</h4>
-        <img [src]="myImage" alt="" width="220" height="234">
-        Container Right
-        <p>{{pricing}}</p>
-        <button type="button" class="btn" style="color:black">Add to cart</button>
-        <br>
-        <br>
-      </div>
-    </div>
-    <div class="col-sm-3 col_right text-center" style=" background-color:#425D77">
-      <div style="color:white">
-        <h4>Produkt Name</h4>
-        <!--<img src="/product/sweatshirt.jpg" alt="Clothing - Sweatshirt" width="500" height="600">
-        <img [src]="myImage" alt="">-->
-        <img [src]="myImage" alt="" width="220" height="234">
-
-        Container Right
-        <p>{{ pricing }}</p>
-        <button type="button" class="btn" style="color:black">Add to bug</button>
-        <br>
-        <br>
-      </div>
-    </div>
+    <br>
   </div>
 </div>
+
 

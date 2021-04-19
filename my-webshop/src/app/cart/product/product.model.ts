@@ -1,11 +1,4 @@
-export class Product {
-  public name: string;
-  public description: string;
-  public imagePath: string;
-
-  constructor(name: string, desc: string, imagePath: string) {
-    this.name = name;
-    this.description = desc;
-    this.imagePath = imagePath;
+export class Names {
+  constructor(public prodId: number, public name: string, public des: string, public imagePath: string, public price: number, public qnt: number){
   }
 }
