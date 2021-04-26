@@ -22,22 +22,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
     //Angular material
 
-import { MatDialogModule } from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatExpansionModule} from '@angular/material/expansion';
-
 const appRoutes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
   {path: 'cart', component: CartComponent},
   {path: 'main', component: MainComponent},
   {path: 'authentication', component: AuthenticationComponent},
   {path: 'main', component: MainComponent},
-  {path: 'login', component: LogInComponent}
+  {path: 'login', component: LogInComponent},
+  {path: 'product', component: ProductComponent}
 
 ];
 
@@ -61,15 +53,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     //Angular material
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatExpansionModule,
-    
+  
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,

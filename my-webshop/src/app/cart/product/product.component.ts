@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Names } from './product.model';
 import {ProductService} from './product.service';
 import { CartService } from '../cart.service';
 import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-product',
@@ -11,11 +12,22 @@ import { ActivatedRoute } from '@angular/router';
   providers: [ProductService]
 })
 export class ProductComponent implements OnInit {
+  @Output() selectedProduct = new EventEmitter<void>();
   addToCart(product){
     this.cartService.addToCart(product);
     window.alert('Your product has been added to the cart');
   }
+  /*@Output() productWasSelected = new EventEmitter<Names>();
 
+  addToCart(){
+    this.selectedProduct.emit();
+
+  }
+
+  onAddToCart(names: Names){
+
+  }
+*/
   myImage: string = "assets/image/sweatshirt.jpg";
   priceRangeFrom = '50kr';
   priceRangeTo = '5000kr';

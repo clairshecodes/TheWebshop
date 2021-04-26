@@ -1,0 +1,38 @@
+.col_middle{
+    margin-right: 10px;
+    margin-left:10px;
+    margin-top: 20px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.col_left{
+    margin-left: 20px;
+    margin-top: 20px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.col_price{
+    margin-left:20px;
+    margin-top: 20px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.content button {
+
+    border-radius: 15%;
+    font-size: 10px;
+}
+.content span {
+    font-weight:800;
+    font-size:18px;
+}
+
+.cart-btn {
+    border-radius:4px;
+    font-weight: 800;
+    font-size:18px;
+    margin-top: 20px;
+}
