@@ -1,16 +1,14 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-
+import {DamerHomeComponent} from './damer-home/damer-home.component';
 import {LogInComponent} from './authentication/log-in/log-in.component';
-import {MainComponent} from './main/main.component';
-import {SignUpComponent} from './authentication/sign-up/sign-up.component';
+import {HerreHomeComponent} from './herre-home/herre-home.component';
 
 
 const appRoutes: Routes = [
-  {path: '', component: MainComponent},
+  {path: 'damer-home', component: DamerHomeComponent},
+  {path: 'herre-home', component: HerreHomeComponent},
   {path: 'login', component: LogInComponent},
-  {path: 'signUp', component: SignUpComponent},
-
 ];
 
 @NgModule({

@@ -1,30 +1,78 @@
-<nav class="navi navbar navbar-default" role="navigation">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
+<div class="wrapper">
+  <div class="multi_color_border" style="display: block">
+    <span id="btext">
+      <marquee behavior="" direction="left">
+      <a href="#" class="breaking-news">
+        <p class="bntime">Made by:</p>
+        Asim, Anthony and Javad
+      </a>
+    </marquee>
+    </span>
   </div>
-  <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav navbar-left">
-        <li><a class="text-white bg-dark" href="/main">JaDes Design</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a routerLink="/checkout">Cart 1</a></li>
-        <li><a routerLink="/cart">Clothes</a></li>
-        <li><a routerLink="/login">Log In</a></li>
-    </ul>
-    <form class="navbar-form navbar-center" role="search">
-      <div class="input-group">
-          <input  type="text" class="form-control" name="srch-term" id="srch-term"
-          [(ngModel)]="clothesName">
+  <div class="top_nav">
+    <div class="left">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="/damer-home" class="navbar-brand">Damer</a></li>
+        <li><a routerLink="/herre-home" class="navbar-brand">Herre</a></li>
+        <li><a href="#Børn-Home" class="navbar-brand">Børn</a></li>
+      </ul>
+    </div>
+    <div class="right">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a routerLink="/login">Log ind</a></li>
+        <li><a href="#wardrobe">Ønsker</a></li>
+        <li><a href="#cart">Indkøbskurve</a></li>
+      </ul>
+    </div>
 
-          <div class="input-group-btn">
-              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-          </div>
-      </div>
-      </form>
-      <router-outlet></router-outlet>
   </div>
-</nav>
+
+  <div class="bottom_nav">
+    <nav class="navbar navbar-expand-md">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="nav navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#GetTheLook">Get the Look</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#Tøj">Tøj</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#Sko">Sko</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#Sport">Sport</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#Accessories">Accessories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#Brands">Brands</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#Second-hand">Second hand</a>
+          </li>
+
+          <li class="nav-item">
+
+          </li>
+
+        </ul>
+
+        <div class="search-container">
+          <form action="/action_page.php">
+            <input type="text" placeholder="Search.." name="search">
+            <!-- <button type="submit" style=""><i class="fa fa-search"></i></button>-->
+          </form>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
