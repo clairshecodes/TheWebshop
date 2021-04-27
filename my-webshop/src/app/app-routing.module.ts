@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-
+//Components
 import {MainComponent} from './main/main.component';
 import {CheckoutComponent} from './checkout/checkout.component';
 import {CartComponent} from './cart/cart.component';
