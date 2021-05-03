@@ -1,8 +1,8 @@
-<div class="container">
+<!--<div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <form (ngSubmit)="onSubmit()" #f="ngForm">
-        <!--FormElement is kind of a director, we can expose som data we can fetch her: ngForm tells angular give me access to this form created automatically -->
+        &lt;!&ndash;FormElement is kind of a director, we can expose som data we can fetch her: ngForm tells angular give me access to this form created automatically &ndash;&gt;
         <div
           id="user-data"
           ngModelGroup="userData"
@@ -15,7 +15,7 @@
                    ngModel
                    name="username"
                    required>
-            <!-- Tells Angular that hey this is my control, ngModel is in the end a directive available in the FormsModule. Name control will be registrered in JSO -->
+            &lt;!&ndash; Tells Angular that hey this is my control, ngModel is in the end a directive available in the FormsModule. Name control will be registrered in JSO &ndash;&gt;
           </div>
 
           <button class="btn btn-default" type="button" (click)="suggestUserName()">Suggest an Username</button>
@@ -49,7 +49,7 @@
             name="questionsAnswer"
             rows="3"
             class="form-control"
-            [(ngModel)]="answer"></textarea> <!--Two way binding -->
+            [(ngModel)]="answer"></textarea> &lt;!&ndash;Two way binding &ndash;&gt;
         </div>
         <p>Your reply: {{ answer }}</p>
 
@@ -67,12 +67,12 @@
           class="btn btn-primary"
           type="submit"
           [disabled]="!f.valid">Submit
-        </button> <!--Using property binding -->
+        </button> &lt;!&ndash;Using property binding &ndash;&gt;
       </form>
     </div>
   </div>
   <hr>
-  <!--I only want to ouput this once the form has been submitted -->
+  &lt;!&ndash;I only want to ouput this once the form has been submitted &ndash;&gt;
   <div class="row" *ngIf="submitted">
     <div class="col-xs-12">
       <h3>Your Data</h3>
@@ -83,4 +83,54 @@
       <p>Gender: {{ user.gender }}</p>
     </div>
   </div>
+</div>-->
+
+
+<!-- Reactive Approach -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="userData">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text"
+                   id="username"
+                   formControlName="username"
+                   class="form-control">
+            <span
+              *ngIf="!signupForm.get('userData.username').valid && signupForm.get('userData.username').touched"
+              class="help-block">
+              <span *ngIf="signupForm.get('userData.username').errors['nameIsForbidden']">This name is invalid</span>
+              <span *ngIf="signupForm.get('userData.username').errors['required']">This field is required</span>
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="email">Mail</label>
+            <input type="text"
+                   formControlName="email"
+                   id="email"
+                   class="form-control">
+            <span
+              *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched"
+              class="help-block">Please enter a valid email!</span>
+          </div>
+        </div>
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input type="radio"
+                   formControlName="gender"
+                   [value]="gender"> {{ gender }}
+          </label>
+        </div>
+        <span
+          *ngIf="!signupForm.valid && signupForm.touched"
+          class="help-block">Please enter a valid data!</span>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
 </div>
+
+

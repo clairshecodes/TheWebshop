@@ -8,7 +8,7 @@ import {SignUpComponent} from './authentication/sign-up/sign-up.component';
 import {LogInComponent} from './authentication/log-in/log-in.component';
 import {CartComponent} from './cart/cart.component';
 import {AddCartComponent} from './cart/add-cart/add-cart.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ItemComponent} from './cart/item/item.component';
 import {FilterPipe} from './filter.pipe';
 import {AppRoutingModule} from './app-routing.module';
@@ -36,13 +36,13 @@ import {HerreHomeComponent} from './herre-home/herre-home.component';
     SkoComponent,
     HerreHomeComponent
   ],
-  imports: [
-    FormsModule,
-    HttpClientModule,
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule
-  ],
+    imports: [
+     //   FormsModule,
+        HttpClientModule,
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
