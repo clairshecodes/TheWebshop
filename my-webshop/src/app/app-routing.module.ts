@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'server-error', component: ServerErrorComponent, data: { breadcrumb: 'Server Error' } },
   { path: 'not-found', component: NotFoundComponent, data: { breadcrumb: 'Not Found' } },
   { path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule), data: { breadcrumb: 'Shop' } },
-  { path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule), data: { breadcrumb: 'Basket' } },
+  { path: 'cart', loadChildren: () => import('./cart/cart.module').then(mod => mod.CartModule), data: { breadcrumb: 'Cart' } },
   {
     path: 'checkout',
     canActivate: [AuthGuard],
@@ -26,9 +26,9 @@ const routes: Routes = [
       .then(mod => mod.OrdersModule), data: { breadcrumb: 'Orders' }
   },
   {
-    path: 'account',
-    loadChildren: () => import('./account/account.module')
-      .then(mod => mod.AccountModule), data: { breadcrumb: { skip: true } }
+    path: 'authentication',
+    loadChildren: () => import('./authentication/authentication.module')
+      .then(mod => mod.AuthenticationModule), data: { breadcrumb: { skip: true } }
   },
   { path: '**', redirectTo: 'not-found', pathMatch: 'full' }
 ];

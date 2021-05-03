@@ -10,7 +10,7 @@ import { IAddress } from 'src/app/shared/models/address';
 @Injectable({
   providedIn: 'root'
 })
-export class authenticationService {
+export class AuthenticationService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<IUser>(1);
   currentUser$ = this.currentUserSource.asObservable();
@@ -26,7 +26,7 @@ export class authenticationService {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
 
-    return this.http.get(this.baseUrl + 'account', {headers}).pipe(
+    return this.http.get(this.baseUrl + 'authentication', {headers}).pipe(
       map((user: IUser) => {
         if (user) {
           localStorage.setItem('token', user.token);
@@ -37,7 +37,7 @@ export class authenticationService {
   }
 
   login(values: any) {
-    return this.http.post(this.baseUrl + 'account/login', values).pipe(
+    return this.http.post(this.baseUrl + 'authentication/login', values).pipe(
       map((user: IUser) => {
         if (user) {
           localStorage.setItem('token', user.token);
@@ -48,7 +48,7 @@ export class authenticationService {
   }
 
   register(values: any) {
-    return this.http.post(this.baseUrl + 'account/register', values).pipe(
+    return this.http.post(this.baseUrl + 'authentication/register', values).pipe(
       map((user: IUser) => {
         if (user) {
           localStorage.setItem('token', user.token);
@@ -65,14 +65,14 @@ export class authenticationService {
   }
 
   checkEmailExists(email: string) {
-    return this.http.get(this.baseUrl + 'account/emailexists?email=' + email);
+    return this.http.get(this.baseUrl + 'authentication/emailexists?email=' + email);
   }
 
   getUserAddress() {
-    return this.http.get<IAddress>(this.baseUrl + 'account/address');
+    return this.http.get<IAddress>(this.baseUrl + 'authentication/address');
   }
 
   updateUserAddress(address: IAddress) {
-    return this.http.put<IAddress>(this.baseUrl + 'account/address', address);
+    return this.http.put<IAddress>(this.baseUrl + 'authentication/address', address);
   }
 }

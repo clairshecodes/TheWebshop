@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { BasketService } from 'src/app/basket/basket.service';
+import { CartService } from 'src/app/cart/cart.service';
 import { CheckoutService } from '../checkout.service';
 import { ToastrService } from 'ngx-toastr';
-import { IBasket } from 'src/app/shared/models/basket';
+import { ICart } from 'src/app/shared/models/cart';
 import { IOrder } from 'src/app/shared/models/order';
 import { Router, NavigationExtras } from '@angular/router';
 
@@ -31,7 +31,7 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
   cardCvcValid = false;
 
   constructor(
-    private basketService: BasketService,
+    private cartService: CartService,
     private checkoutService: CheckoutService,
     private toastr: ToastrService,
     private router: Router) { }
@@ -80,13 +80,13 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
 
   async submitOrder() {
     this.loading = true;
-    const basket = this.basketService.getCurrentBasketValue();
+    const cart = this.cartService.getCurrentCartValue();
     try {
-      const createdOrder = await this.createOrder(basket);
-      const paymentResult = await this.confirmPaymentWithStripe(basket);
+      const createdOrder = await this.createOrder(cart);
+      const paymentResult = await this.confirmPaymentWithStripe(cart);
 
       if (paymentResult.paymentIntent) {
-        this.basketService.deleteBasket(basket);
+        this.cartService.deleteCart(cart);
         const navigationExtras: NavigationExtras = {state: createdOrder};
         this.router.navigate(['checkout/success'], navigationExtras);
       } else {
@@ -99,8 +99,8 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  private async confirmPaymentWithStripe(basket) {
-    return this.stripe.confirmCardPayment(basket.clientSecret, {
+  private async confirmPaymentWithStripe(cart) {
+    return this.stripe.confirmCardPayment(cart.clientSecret, {
       payment_method: {
         card: this.cardNumber,
         billing_details: {
@@ -110,14 +110,14 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  private async createOrder(basket: IBasket) {
-    const orderToCreate = this.getOrderToCreate(basket);
+  private async createOrder(cart: ICart) {
+    const orderToCreate = this.getOrderToCreate(cart);
     return this.checkoutService.creatOrder(orderToCreate).toPromise();
   }
 
-  private getOrderToCreate(basket: IBasket) {
+  private getOrderToCreate(cart: ICart) {
     return {
-      basketId: basket.id,
+      cartId: cart.id,
       deliveryMethodId: +this.checkoutForm.get('deliveryForm').get('deliveryMethod').value,
       shipToAddress: this.checkoutForm.get('addressForm').value
     };

@@ -26,9 +26,9 @@ const routes: Routes = [
       .then(mod => mod.OrdersModule), data: { breadcrumb: 'Orders' }
   },
   {
-    path: 'account',
+    path: 'authentication',
     loadChildren: () => import('./authentication/authentication.module')
-      .then(mod => mod.AccountModule), data: { breadcrumb: { skip: true } }
+      .then(mod => mod.AuthenticationModule), data: { breadcrumb: { skip: true } }
   },
   { path: '**', redirectTo: 'not-found', pathMatch: 'full' }
 ];

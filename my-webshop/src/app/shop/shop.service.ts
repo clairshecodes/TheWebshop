@@ -12,7 +12,7 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class ShopService {
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = 'https://localhost:3000/api/';
   products: IProduct[] = [];
   brands: IBrand[] = [];
   types: IType[] = [];

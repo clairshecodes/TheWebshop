@@ -8,7 +8,7 @@ import { AuthenticationService } from './authentication/authentication.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Skinet';
+  title = 'Jades Design';
 
   constructor(private cartService: CartService, private authenticationService: AuthenticationService) { }
 
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   loadCurrentUser() {
     const token = localStorage.getItem('token');
-    this.AuthenticationService.loadCurrentUser(token).subscribe(() => {
+    this.authenticationService.loadCurrentUser(token).subscribe(() => {
       console.log('loaded user');
     }, error => {
       console.log(error);

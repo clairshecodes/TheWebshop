@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errors: string[];
 
-  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private router: Router) { }
+  constructor(private fb: FormBuilder, private AuthenticationService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
     this.createRegisterForm();
@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authenticationService.register(this.registerForm.value).subscribe(response => {
+    this.AuthenticationService.register(this.registerForm.value).subscribe(response => {
       this.router.navigateByUrl('/shop');
     }, error => {
       console.log(error);
@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
           if (!control.value) {
             return of(null);
           }
-          return this.authenticationService.checkEmailExists(control.value).pipe(
+          return this.AuthenticationService.checkEmailExists(control.value).pipe(
             map(res => {
               return res ? { emailExists: true } : null;
             })

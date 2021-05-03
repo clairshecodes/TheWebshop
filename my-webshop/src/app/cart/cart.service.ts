@@ -1,78 +1,162 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, ReplaySubject, of } from 'rxjs';
-import { IUser } from '../shared/models/user';
-import { map, take } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { IAddress } from '../shared/models/address';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { ICart, ICartItem, Cart, ICartTotals } from '../shared/models/cart';
+import { map } from 'rxjs/operators';
+import { IProduct } from '../shared/models/product';
+import { IDeliveryMethod } from '../shared/models/deliveryMethod';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
+export class CartService {
+  [x: string]: any;
   baseUrl = environment.apiUrl;
-  private currentUserSource = new ReplaySubject<IUser>(1);
-  currentUser$ = this.currentUserSource.asObservable();
+  private CartSource = new BehaviorSubject<ICart>(null);
+  cart$ = this.CartSource.asObservable();
+  private cartTotalSource = new BehaviorSubject<ICartTotals>(null);
+  cartTotal$ = this.cartTotalSource.asObservable();
+  shipping = 0;
+  cartSource: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
-  loadCurrentUser(token: string) {
-    if (token === null) {
-      this.currentUserSource.next(null);
-      return of(null);
+  createPaymentIntent() {
+    return this.http.post(this.baseUrl + 'payments/' + this.getCurrentCartValue().id, {})
+      .pipe(
+        map((cart: ICart) => {
+          this.cartSource.next(cart);
+        })
+      );
+  }
+
+  setShippingPrice(deliveryMethod: IDeliveryMethod) {
+    this.shipping = deliveryMethod.price;
+    const cart = this.getCurrentCartValue();
+    cart.deliveryMethodId = deliveryMethod.id;
+    cart.shippingPrice = deliveryMethod.price;
+    this.calculateTotals();
+    this.setCart(Cart);
+  }
+
+  getCart(id: string) {
+    return this.http.get(this.baseUrl + 'cart?id=' + id)
+      .pipe(
+        map((cart: ICart) => {
+          this.cartSource.next(Cart);
+          this.shipping = Cart.shippingPrice;
+          this.calculateTotals();
+        })
+      );
+  }
+
+  setcart(cart: ICart) {
+    return this.http.post(this.baseUrl + 'cart', Cart).subscribe((response: ICart) => {
+      this.cartSource.next(response);
+      this.calculateTotals();
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getCurrentCartValue() {
+    return this.cartSource.value;
+  }
+
+  addItemToCart(item: IProduct, quantity = 1) {
+    const itemToAdd: ICartItem = this.mapProductItemToCartItem(item, quantity);
+    let cart = this.getCurrentCartValue();
+    if (cart === null) {
+      cart = this.createCart();
     }
-
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', `Bearer ${token}`);
-
-    return this.http.get(this.baseUrl + 'account', {headers}).pipe(
-      map((user: IUser) => {
-        if (user) {
-          localStorage.setItem('token', user.token);
-          this.currentUserSource.next(user);
-        }
-      })
-    );
+    cart.items = this.addOrUpdateItem(cart.items, itemToAdd, quantity);
+    this.setCart(cart);
+  }
+  setCart(cart: any) {
+    throw new Error('Method not implemented.');
   }
 
-  login(values: any) {
-    return this.http.post(this.baseUrl + 'account/login', values).pipe(
-      map((user: IUser) => {
-        if (user) {
-          localStorage.setItem('token', user.token);
-          this.currentUserSource.next(user);
-        }
-      })
-    );
+  incrementItemQuantity(item: ICartItem) {
+    const cart = this.getCurrentCartValue();
+    const foundItemIndex = cart.items.findIndex(x => x.id === item.id);
+    cart.items[foundItemIndex].quantity++;
+    this.setCart(cart);
   }
 
-  register(values: any) {
-    return this.http.post(this.baseUrl + 'account/register', values).pipe(
-      map((user: IUser) => {
-        if (user) {
-          localStorage.setItem('token', user.token);
-          this.currentUserSource.next(user);
-        }
-      })
-    );
+  decrementItemQuantity(item: ICartItem) {
+    const cart = this.getCurrentCartValue();
+    const foundItemIndex = cart.items.findIndex(x => x.id === item.id);
+    if (cart.items[foundItemIndex].quantity > 1) {
+      cart.items[foundItemIndex].quantity--;
+      this.setCArt(cart);
+    } else {
+      this.removeItemFromCart(item);
+    }
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.currentUserSource.next(null);
-    this.router.navigateByUrl('/');
+  removeItemFromCart(item: ICartItem) {
+    const cart = this.getCurrentCartValue();
+    if (cart.items.some(x => x.id === item.id)) {
+      cart.items = cart.items.filter(i => i.id !== item.id);
+      if (cart.items.length > 0) {
+        this.setCart(cart);
+      } else {
+        this.deleteCart(cart);
+      }
+    }
   }
 
-  checkEmailExists(email: string) {
-    return this.http.get(this.baseUrl + 'account/emailexists?email=' + email);
+  deleteLocalCart(id: string) {
+    this.cartSource.next(null);
+    this.cartTotalSource.next(null);
+    localStorage.removeItem('cart_id');
   }
 
-  getUserAddress() {
-    return this.http.get<IAddress>(this.baseUrl + 'account/address');
+  deleteCart(cart: ICart) {
+    return this.http.delete(this.baseUrl + 'cart?id=' + cart.id).subscribe(() => {
+      this.cartSource.next(null);
+      this.cartTotalSource.next(null);
+      localStorage.removeItem('cart_id');
+    }, error => {
+      console.log(error);
+    });
   }
 
-  updateUserAddress(address: IAddress) {
-    return this.http.put<IAddress>(this.baseUrl + 'account/address', address);
+  private calculateTotals() {
+    const cart = this.getCurrentCartValue();
+    const shipping = this.shipping;
+    const subtotal = cart.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
+    const total = subtotal + shipping;
+    this.cartTotalSource.next({shipping, total, subtotal});
+  }
+
+  private addOrUpdateItem(items: ICartItem[], itemToAdd: ICartItem, quantity: number): ICartItem[] {
+    const index = items.findIndex(i => i.id === itemToAdd.id);
+    if (index === -1) {
+      itemToAdd.quantity = quantity;
+      items.push(itemToAdd);
+    } else {
+      items[index].quantity += quantity;
+    }
+    return items;
+  }
+
+  private createCart(): ICart {
+    const cart = new Cart();
+    localStorage.setItem('cart_id', cart.id);
+    return cart;
+  }
+
+  private mapProductItemToCartItem(item: IProduct, quantity: number): ICartItem {
+    return {
+      id: item.id,
+      productName: item.name,
+      price: item.price,
+      pictureUrl: item.pictureUrl,
+      quantity,
+      brand: item.productBrand,
+      type: item.productType
+    };
   }
 }

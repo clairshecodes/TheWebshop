@@ -8,11 +8,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component';
-import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
+import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent, StepperComponent, BasketSummaryComponent],
+  declarations: [PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent, StepperComponent, CartSummaryComponent],
   imports: [
     CommonModule,
     PaginationModule.forRoot(),
@@ -35,7 +35,7 @@ import { RouterModule } from '@angular/router';
     TextInputComponent,
     CdkStepperModule,
     StepperComponent,
-    BasketSummaryComponent
+    CartSummaryComponent
   ]
 })
 export class SharedModule { }

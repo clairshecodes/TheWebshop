@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private AuthenticationService: AuthenticationService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/shop';
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authenticationService.login(this.loginForm.value).subscribe(() => {
+    this.AuthenticationService.login(this.loginForm.value).subscribe(() => {
       this.router.navigateByUrl(this.returnUrl);
     }, error => {
       console.log(error);
