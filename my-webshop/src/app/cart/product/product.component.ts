@@ -12,69 +12,47 @@ import { ActivatedRoute } from '@angular/router';
   providers: [ProductService]
 })
 export class ProductComponent implements OnInit {
-  @Output() selectedProduct = new EventEmitter<Names>();
-  names: Names[];
+  @Output() selectedProduct = new EventEmitter<void>();
 
-  
-  /*addToCart(product){
+  addToCart(product){
     this.cartService.addToCart(product);
     window.alert('Your product has been added to the cart');
   }
-*/
-
-
-  /*@Output() productWasSelected = new EventEmitter<Names>();
-
-  addToCart(){
-    this.selectedProduct.emit();
-
+  
+  constructor(
+    private productService: ProductService, private cartService: CartService, private route: ActivatedRoute
+    ) {
+    this.names = this.productService.getProduct();
   }
-
-  onAddToCart(names: Names){
-
-  }
-*/
-
+ 
+  myImage: string = "assets/image/sweatshirt.jpg";
   priceRangeFrom = '50kr';
   priceRangeTo = '5000kr';
   pricing = "something kr.";
+  names: Names[];
 
-  onProductAdded(product: Names){ 
-    this.names.push(product);
-    window.alert('Your product has been added to the cart');
-  }
-
-  constructor(private cartService: CartService, private route: ActivatedRoute
-    ) {
+  Up(i){
+    i.qnt;
   }
 
   //Increasing the amount of items
-  inc(i) {
+  inc(item) {
     //console.log(i);
-    if (i.qnt !== 5) {
-      i.qnt += 1;
+    if (item.qnt !== 5) {
+      item.qnt += 1;
     }
   }
 
   //Decresing the amount of items
-  dec(i) {
+  dec(item) {
     //console.log(i);
-    if (i.qnt !== 1) {
-      i.qnt -= 1;
+    if (item.qnt !== 1) {
+      item.qnt -= 1;
     }
   }
   
-  onAddCart(names:Names){
-    console.log(names);
-  }
- 
-  
-  ngOnInit() {
-    this.names = this.cartService.getProducts();
-  }
 
-  onProductSelected (name: Names){
-    this.selectedProduct.emit(name);
+  ngOnInit(): void {
   }
 
   onUpdatePriceFrom(event: any) {
@@ -87,6 +65,5 @@ export class ProductComponent implements OnInit {
 
   onUpdatePricing(event: any) {
     this.pricing = (event.target as HTMLInputElement).value;
-
   }
 }

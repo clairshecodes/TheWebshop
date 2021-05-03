@@ -1,33 +1,27 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import {CartService} from './cart.service';
-import { ProductService } from './product/product.service';
-import {Names} from './product/product.model';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['/cart.component.css'],
-  providers: [CartService]
+  styleUrls: ['/cart.component.css']
 })
 export class CartComponent implements OnInit {
-  names: Names[];
+  items = this.cartService.getItems();
+  
+  total(){
+    return this.cartService.total();
+  }
 
-  /*
-  updateTotal(updatePrice, updateQuant){
-    this.productService.updateTotal(updatePrice, updateQuant);
-  } */
+  removeFromCart(product){
+    this.cartService.removeFromCart(product);
+    window.alert('Item has been removed');
+  }
 
   constructor(private cartService: CartService) { }
 
-  ngOnInit(): void {this.cartService.getProduct();
-    
-    
-    /*this.cartService.productChanged.subscribe(
-      names: Names[]) => {
-        this.names = names;
-      }
-    )
-    this.names = this.
-    this.names = this.cartService.getItems(); */
-  } 
+  ngOnInit(): void {
+  }
+
 }

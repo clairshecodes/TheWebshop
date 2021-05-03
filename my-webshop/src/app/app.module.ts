@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import {HeaderComponent} from './header/header.component'
 import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
@@ -19,10 +18,8 @@ import { ItemComponent } from './cart/item/item.component';
 import {FilterPipe} from './filter.pipe';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CartService } from './cart/cart.service';
-import { ProductItemComponent } from './product/product-item/product-item.component';
 
-    //Angular material
+
 
 const appRoutes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
@@ -39,7 +36,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     AuthenticationComponent,
     SignUpComponent,
     LogInComponent,
@@ -51,8 +47,7 @@ const appRoutes: Routes = [
     ConfirmationComponent,
     MainComponent,
     ItemComponent,
-    FilterPipe,
-    ProductItemComponent
+    FilterPipe
   ],
   imports: [
     //Angular material
@@ -64,7 +59,7 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ProductService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

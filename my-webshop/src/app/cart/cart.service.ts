@@ -1,53 +1,52 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http'
-import {Names} from './product/product.model';
-import {Subject} from 'rxjs';
 
 
-export class CartService {
-  productSelected = new EventEmitter<Names>();
-  private names: Names[] = [
-    new Names(1,'Minus', 'This is a blouse made by vanilla', "assets/image/sweatshirt.jpg", 200, 1), new Names(2, 'Ripped shirt', 'As the title says ripped', "assets/image/co-ord.jpg", 300, 1), new Names(3, 'Jacked shirt', 'Made by famous Jack', "assets/image/whole.jpg", 400, 1), new Names(4, 'Cali', 'More like Cali flower', "assets/image/sweatshirt.jpg", 200, 1), new Names(5, 'Hello', 'Makes you want to say Hello to the world', "assets/image/sweatshirt.jpg", 300, 1),
-    new Names(6, 'Shirt1', 'Just a shirt', "assets/image/co-ord.jpg", 300, 1), new Names(7, 'Shirt2', 'Just another shirt', "assets/image/whole.jpg", 200, 1)
-  ];
-
-  getProducts(){
-    return this.names.slice();
-  }
 
 
-  /*productChanged = new Subject<Names[]>();
-  productSelected = new EventEmitter<Names>();
-  private names: Names[] = [
-    new Names(1,'Minus', 'This is a blouse made by vanilla', "assets/image/sweatshirt.jpg", 200, 1), new Names(2, 'Ripped shirt', 'As the title says ripped', "assets/image/co-ord.jpg", 300, 1), new Names(3, 'Jacked shirt', 'Made by famous Jack', "assets/image/whole.jpg", 400, 1), new Names(4, 'Cali', 'More like Cali flower', "assets/image/sweatshirt.jpg", 200, 1), new Names(5, 'Hello', 'Makes you want to say Hello to the world', "assets/image/sweatshirt.jpg", 300, 1),
-    new Names(6, 'Shirt1', 'Just a shirt', "assets/image/co-ord.jpg", 300, 1), new Names(7, 'Shirt2', 'Just another shirt', "assets/image/whole.jpg", 200, 1)
-  ];
 
-  getProduct(){
-    return this.names.slice();
-}
-
-  addProduct(product: Names){
-    this.names.push(product);
-    this.productChanged.next(this.names.slice());
-  }
-  addProducts(names: Names[]){
-    this.names.push(...names);
-    this.productChanged.next(this.names.slice);
-  }
-}
-
-
-/*
 @Injectable({
     providedIn: 'root'
   })
   export class CartService {
+    //private basketSource = new BehaviorSubject<IBasket>(null);
+    //basket$ = this.basketSource.asObservable();
     items = [];
-    
-    addToCart(product) {
+
+   /* getItems() {
+      return this.basketSource;
+    }
+
+    addItemToBasket(item: Names) {
+      const itemToAdd: IBasketItem = this.mapProductItemToBasketItem(item, quantity);
+      const basket = this.getCurrentBasketValue() ?? this.createBasket();
+      basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity);
+      this.setBasket(basket);
+    }
+    getCurrentBasketValue() {
+      return this.basketSource.value;
+    }  
+    private calculateTotals() {
+      const basket = this.getCurrentBasketValue();
+      //const shipping = this.shipping;
+      const subtotal = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
+      //const total = subtotal + shipping;
+      //this.basketTotalSource.next({shipping, total, subtotal});
+    }
+    */
+
+      addToCart(product) {
         this.items.push(product);
       }
+
+      /*
+      removeFromCart(product) {
+        this.items.slice(product);
+      } */
+
+      /*getCurrentBasketValue() {
+        return this.basketSource.value;
+      }*/    
     
       getItems() {
         return this.items;
@@ -57,5 +56,35 @@ export class CartService {
         this.items = [];
         return this.items;
       }
-*/
-    }
+      
+      updateCart(price:number, qnt:number){
+        return this.items.push(price += price*qnt);
+      }
+
+      total(){
+        let total = 0;
+        for (let i=0; i<this.items.length; i++){
+          total += this.items[i].price * this.items[i].qnt;
+        }
+        console.log('Total in cart:', total);
+        //return total.toFixed(2);
+        return total;
+      } 
+
+      removeFromCart(item){
+        console.log('Removing Item:', item);
+        if (item.qnt ===1){
+          for(let i = 0; i<this.items.length; i++){
+            if(this.items[i].prodId===item.prodId){
+              this.items.splice(item, 1);
+              console.log('This element is deleted:', item);
+              return
+            }
+          }
+        } else {
+          item.qnt;
+        }
+       
+      }
+    constructor(private http: HttpClient) {}
+  }
