@@ -82,7 +82,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http'
             }
           }
         } else {
-          item.qnt;
+          item.qnt--;
         }
        
       }

@@ -1,5 +1,5 @@
 .col_middle{
-    margin-right: 10px;
+    margin-right: 20px;
     margin-left:10px;
     margin-top: 20px;
     border: 1px solid;
@@ -7,7 +7,7 @@
 }
 
 .col_left{
-    margin-left: 20px;
+    margin-left: 80px;
     margin-top: 20px;
     border: 1px solid;
     border-radius: 10px;

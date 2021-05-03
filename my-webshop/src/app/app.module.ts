@@ -11,7 +11,7 @@ import { AddCartComponent } from './cart/add-cart/add-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentComponent } from './checkout/payment/payment.component';
 import { ConfirmationComponent } from './checkout/confirmation/confirmation.component';
-import {Routes, RouterModule} from "@angular/router";
+import {AppRoutingModule} from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { ItemComponent } from './cart/item/item.component';
@@ -21,16 +21,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
-const appRoutes: Routes = [
-  {path: 'checkout', component: CheckoutComponent},
-  {path: 'cart', component: CartComponent},
-  {path: 'main', component: MainComponent},
-  {path: 'authentication', component: AuthenticationComponent},
-  {path: 'main', component: MainComponent},
-  {path: 'login', component: LogInComponent},
-  {path: 'product', component: ProductComponent}
-
-];
 
 
 @NgModule({
@@ -51,13 +41,13 @@ const appRoutes: Routes = [
   ],
   imports: [
     //Angular material
-  
+    AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    //RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

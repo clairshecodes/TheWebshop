@@ -1,6 +1,6 @@
 
-<div class="row" style=" background-color:#7290AC">
-
+<div class="row col-4" style=" background-color:#7290AC">
+<!--
   <div class="col-sm-2 col_price " style=" background-color:#425D77">
     
     <h4 style="color:white"> Price Range</h4>
@@ -17,8 +17,8 @@
     <button type="button" class="btn">Filter</button>
     <br>
     <br>
-  </div>
-<div>
+  </div>  -->
+<div> 
 <div *ngFor="let product of names" (productWasSelected)="selectedProduct = $event" >
       <div class="col-sm-3  col_left text-center "  *ngFor="let i of names" 
        style=" background-color:#425D77"
@@ -44,6 +44,6 @@
   </div>
   <br>
 </div>
-</div>
+
 
 
