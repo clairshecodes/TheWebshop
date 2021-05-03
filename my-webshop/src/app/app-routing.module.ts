@@ -6,6 +6,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
 import { MainComponent } from './main/main.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 
 
 const appRoutes: Routes = [
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
   {path: 'cart', component: CartComponent},
   {path: 'checkout', component: CheckoutComponent},
   {path: 'login', component: LogInComponent},
+  {path: 'signup', component: SignUpComponent},
   {path: 'authentication', component: AuthenticationComponent},
 ];
 
