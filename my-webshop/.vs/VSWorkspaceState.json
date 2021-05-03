@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\authentication",
+    "\\src\\app\\checkout",
+    "\\src\\app\\checkout\\checkout-address"
+  ],
+  "SelectedNode": "\\src\\app\\checkout\\checkout-address\\checkout-address.component.html",
+  "PreviewInSolutionExplorer": false
+}
