@@ -22,6 +22,7 @@ export interface ICartItem {
 export class Cart implements ICart {
     id = uuid();
     items: ICartItem[] = [];
+  static shippingPrice: number;
 }
 
 export interface ICartTotals {

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CheckoutService } from '../checkout.service';
 import { IDeliveryMethod } from 'src/app/shared/models/deliveryMethod';
-import { CartService } from 'src/app/cart/cart.service';
+import { CartService} from 'src/app/cart/cart.service';
 
 @Component({
   selector: 'app-checkout-delivery',

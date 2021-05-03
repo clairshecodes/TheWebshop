@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { AccountService } from '../authentication/authentication.service';
-import { cartService } from '../cart/cart.service';
+import { AuthenticationService } from '../authentication/authentication.service';
+import { CartService } from '../cart/cart.service';
 import { Observable } from 'rxjs';
-import { IcartTotals } from '../shared/models/cart';
+import { ICartTotals } from '../shared/models/cart';
 
 @Component({
   selector: 'app-checkout',
@@ -11,10 +11,10 @@ import { IcartTotals } from '../shared/models/cart';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-  cartTotals$: Observable<IcartTotals>;
+  cartTotals$: Observable<ICartTotals>;
   checkoutForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private accountService: AccountService, private cartService: cartService) { }
+  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService, private cartService: CartService) { }
 
   ngOnInit() {
     this.createCheckoutForm();
@@ -43,7 +43,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getAddressFormValues() {
-    this.accountService.getUserAddress().subscribe(address => {
+    this.authenticationService.getUserAddress().subscribe(address => {
       if (address) {
         this.checkoutForm.get('addressForm').patchValue(address);
       }
@@ -53,9 +53,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   getDeliveryMethodValue() {
-    const basket = this.cartService.getCurrentBasketValue();
-    if (basket.deliveryMethodId !== null) {
-      this.checkoutForm.get('deliveryForm').get('deliveryMethod').patchValue(basket.deliveryMethodId.toString());
+    const cart = this.cartService.getCurrentCartValue();
+    if (cart.deliveryMethodId !== null) {
+      this.checkoutForm.get('deliveryForm').get('deliveryMethod').patchValue(cart.deliveryMethodId.toString());
     }
   }
 

@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject, of } from 'rxjs';
-import { IUser } from '../models/user';
+import { IUser } from 'src/app/shared/models/user';
 import { map, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { IAddress } from '../models/address';
+import { IAddress } from 'src/app/shared/models/address';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
+export class authenticationService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<IUser>(1);
   currentUser$ = this.currentUserSource.asObservable();

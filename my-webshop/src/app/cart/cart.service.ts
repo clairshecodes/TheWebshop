@@ -1,157 +1,78 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { IBasket, IBasketItem, Basket, IBasketTotals } from '../shared/models/basket';
-import { map } from 'rxjs/operators';
-import { IProduct } from '../shared/models/product';
-import { IDeliveryMethod } from '../shared/models/deliveryMethod';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, ReplaySubject, of } from 'rxjs';
+import { IUser } from '../shared/models/user';
+import { map, take } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { IAddress } from '../shared/models/address';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BasketService {
+export class AccountService {
   baseUrl = environment.apiUrl;
-  private basketSource = new BehaviorSubject<IBasket>(null);
-  basket$ = this.basketSource.asObservable();
-  private basketTotalSource = new BehaviorSubject<IBasketTotals>(null);
-  basketTotal$ = this.basketTotalSource.asObservable();
-  shipping = 0;
+  private currentUserSource = new ReplaySubject<IUser>(1);
+  currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  createPaymentIntent() {
-    return this.http.post(this.baseUrl + 'payments/' + this.getCurrentBasketValue().id, {})
-      .pipe(
-        map((basket: IBasket) => {
-          this.basketSource.next(basket);
-        })
-      );
-  }
-
-  setShippingPrice(deliveryMethod: IDeliveryMethod) {
-    this.shipping = deliveryMethod.price;
-    const basket = this.getCurrentBasketValue();
-    basket.deliveryMethodId = deliveryMethod.id;
-    basket.shippingPrice = deliveryMethod.price;
-    this.calculateTotals();
-    this.setBasket(basket);
-  }
-
-  getBasket(id: string) {
-    return this.http.get(this.baseUrl + 'basket?id=' + id)
-      .pipe(
-        map((basket: IBasket) => {
-          this.basketSource.next(basket);
-          this.shipping = basket.shippingPrice;
-          this.calculateTotals();
-        })
-      );
-  }
-
-  setBasket(basket: IBasket) {
-    return this.http.post(this.baseUrl + 'basket', basket).subscribe((response: IBasket) => {
-      this.basketSource.next(response);
-      this.calculateTotals();
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  getCurrentBasketValue() {
-    return this.basketSource.value;
-  }
-
-  addItemToBasket(item: IProduct, quantity = 1) {
-    const itemToAdd: IBasketItem = this.mapProductItemToBasketItem(item, quantity);
-    let basket = this.getCurrentBasketValue();
-    if (basket === null) {
-      basket = this.createBasket();
+  loadCurrentUser(token: string) {
+    if (token === null) {
+      this.currentUserSource.next(null);
+      return of(null);
     }
-    basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity);
-    this.setBasket(basket);
+
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', `Bearer ${token}`);
+
+    return this.http.get(this.baseUrl + 'account', {headers}).pipe(
+      map((user: IUser) => {
+        if (user) {
+          localStorage.setItem('token', user.token);
+          this.currentUserSource.next(user);
+        }
+      })
+    );
   }
 
-  incrementItemQuantity(item: IBasketItem) {
-    const basket = this.getCurrentBasketValue();
-    const foundItemIndex = basket.items.findIndex(x => x.id === item.id);
-    basket.items[foundItemIndex].quantity++;
-    this.setBasket(basket);
+  login(values: any) {
+    return this.http.post(this.baseUrl + 'account/login', values).pipe(
+      map((user: IUser) => {
+        if (user) {
+          localStorage.setItem('token', user.token);
+          this.currentUserSource.next(user);
+        }
+      })
+    );
   }
 
-  decrementItemQuantity(item: IBasketItem) {
-    const basket = this.getCurrentBasketValue();
-    const foundItemIndex = basket.items.findIndex(x => x.id === item.id);
-    if (basket.items[foundItemIndex].quantity > 1) {
-      basket.items[foundItemIndex].quantity--;
-      this.setBasket(basket);
-    } else {
-      this.removeItemFromBasket(item);
-    }
+  register(values: any) {
+    return this.http.post(this.baseUrl + 'account/register', values).pipe(
+      map((user: IUser) => {
+        if (user) {
+          localStorage.setItem('token', user.token);
+          this.currentUserSource.next(user);
+        }
+      })
+    );
   }
 
-  removeItemFromBasket(item: IBasketItem) {
-    const basket = this.getCurrentBasketValue();
-    if (basket.items.some(x => x.id === item.id)) {
-      basket.items = basket.items.filter(i => i.id !== item.id);
-      if (basket.items.length > 0) {
-        this.setBasket(basket);
-      } else {
-        this.deleteBasket(basket);
-      }
-    }
+  logout() {
+    localStorage.removeItem('token');
+    this.currentUserSource.next(null);
+    this.router.navigateByUrl('/');
   }
 
-  deleteLocalBasket(id: string) {
-    this.basketSource.next(null);
-    this.basketTotalSource.next(null);
-    localStorage.removeItem('basket_id');
+  checkEmailExists(email: string) {
+    return this.http.get(this.baseUrl + 'account/emailexists?email=' + email);
   }
 
-  deleteBasket(basket: IBasket) {
-    return this.http.delete(this.baseUrl + 'basket?id=' + basket.id).subscribe(() => {
-      this.basketSource.next(null);
-      this.basketTotalSource.next(null);
-      localStorage.removeItem('basket_id');
-    }, error => {
-      console.log(error);
-    });
+  getUserAddress() {
+    return this.http.get<IAddress>(this.baseUrl + 'account/address');
   }
 
-  private calculateTotals() {
-    const basket = this.getCurrentBasketValue();
-    const shipping = this.shipping;
-    const subtotal = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
-    const total = subtotal + shipping;
-    this.basketTotalSource.next({shipping, total, subtotal});
-  }
-
-  private addOrUpdateItem(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number): IBasketItem[] {
-    const index = items.findIndex(i => i.id === itemToAdd.id);
-    if (index === -1) {
-      itemToAdd.quantity = quantity;
-      items.push(itemToAdd);
-    } else {
-      items[index].quantity += quantity;
-    }
-    return items;
-  }
-
-  private createBasket(): IBasket {
-    const basket = new Basket();
-    localStorage.setItem('basket_id', basket.id);
-    return basket;
-  }
-
-  private mapProductItemToBasketItem(item: IProduct, quantity: number): IBasketItem {
-    return {
-      id: item.id,
-      productName: item.name,
-      price: item.price,
-      pictureUrl: item.pictureUrl,
-      quantity,
-      brand: item.productBrand,
-      type: item.productType
-    };
+  updateUserAddress(address: IAddress) {
+    return this.http.put<IAddress>(this.baseUrl + 'account/address', address);
   }
 }

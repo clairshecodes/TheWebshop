@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { authenticationService } from 'src/app/authentication/authentication.service';
-//import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { IAddress } from 'src/app/shared/models/address';
 
 @Component({
@@ -12,13 +12,13 @@ import { IAddress } from 'src/app/shared/models/address';
 export class CheckoutAddressComponent implements OnInit {
   @Input() checkoutForm: FormGroup;
 
-  constructor(private authenticationService: authenticationService, private toastr: ToastrService) { }
+  constructor(private AuthenticationService: authenticationService, private toastr: ToastrService) { }
 
   ngOnInit() {
   }
 
   saveUserAddress() {
-    this.authenticationService.updateUserAddress(this.checkoutForm.get('addressForm').value)
+    this.AuthenticationService.updateUserAddress(this.checkoutForm.get('addressForm').value)
       .subscribe((address: IAddress) => {
         this.toastr.success('Address saved');
         this.checkoutForm.get('addressForm').reset(address);
