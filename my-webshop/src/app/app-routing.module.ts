@@ -15,8 +15,6 @@ const appRoutes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
   {path: 'login', component: LogInComponent},
   {path: 'authentication', component: AuthenticationComponent},
-
-
 ];
 
 @NgModule({
