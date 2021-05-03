@@ -12,12 +12,14 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentComponent } from './checkout/payment/payment.component';
 import { ConfirmationComponent } from './checkout/confirmation/confirmation.component';
 import {AppRoutingModule} from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { ItemComponent } from './cart/item/item.component';
 import {FilterPipe} from './filter.pipe';
 
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ConfirmationComponent,
     MainComponent,
     ItemComponent,
-    FilterPipe
+    FilterPipe,
+    HeaderComponent
   ],
   imports: [
     //Angular material
@@ -44,6 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule
     //RouterModule.forRoot(appRoutes)
   ],
   providers: [],

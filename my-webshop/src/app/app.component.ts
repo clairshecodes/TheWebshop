@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'JaDes Webshop';
+ /* title = 'JaDes Webshop';
   clothesName = 'Search';
 
   characters = [
@@ -16,10 +16,6 @@ export class AppComponent {
     'Co-Ords'
   ];
   collapsed = true;
-  searchText = 'Search';
+  searchText = 'Search';*/
 
-
-  onUpdateServerName(event: any) {
-    this.clothesName = (event.target as HTMLInputElement).value;
-  }
 }

@@ -9,7 +9,7 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 
 
 const appRoutes: Routes = [
-  {path: '', redirectTo: '/main'},
+  {path: 'main', component: MainComponent },
   {path: 'product', component: ProductComponent},
   {path: 'cart', component: CartComponent},
   {path: 'checkout', component: CheckoutComponent},
