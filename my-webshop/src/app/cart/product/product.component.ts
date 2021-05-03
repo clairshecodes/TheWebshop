@@ -12,11 +12,17 @@ import { ActivatedRoute } from '@angular/router';
   providers: [ProductService]
 })
 export class ProductComponent implements OnInit {
-  @Output() selectedProduct = new EventEmitter<void>();
-  addToCart(product){
+  @Output() selectedProduct = new EventEmitter<Names>();
+  names: Names[];
+
+  
+  /*addToCart(product){
     this.cartService.addToCart(product);
     window.alert('Your product has been added to the cart');
   }
+*/
+
+
   /*@Output() productWasSelected = new EventEmitter<Names>();
 
   addToCart(){
@@ -28,25 +34,20 @@ export class ProductComponent implements OnInit {
 
   }
 */
-  myImage: string = "assets/image/sweatshirt.jpg";
+
   priceRangeFrom = '50kr';
   priceRangeTo = '5000kr';
   pricing = "something kr.";
-  names: Names[];
 
-
-  constructor(
-    private productService: ProductService, private cartService: CartService, private route: ActivatedRoute
-    ) {
-    this.names = this.productService.getProduct();
+  onProductAdded(product: Names){ 
+    this.names.push(product);
+    window.alert('Your product has been added to the cart');
   }
-/*
-  names: Names[] = [
-    new Names(1,'Minus', 'This is a blouse made by vanilla', "assets/image/sweatshirt.jpg", 200, 1), new Names(2, 'Ripped shirt', 'As the title says ripped', "assets/image/co-ord.jpg", 300, 1), new Names(3, 'Jacked shirt', 'Made by famous Jack', "assets/image/whole.jpg", 400, 1), new Names(4, 'Cali', 'More like Cali flower', "assets/image/sweatshirt.jpg", 200, 1), new Names(5, 'Hello', 'Makes you want to say Hello to the world', "assets/image/sweatshirt.jpg", 300, 1),
-    new Names(6, 'Shirt1', 'Just a shirt', "assets/image/co-ord.jpg", 300, 1), new Names(7, 'Shirt2', 'Just another shirt', "assets/image/whole.jpg", 200, 1)
-  ];
 
-  */
+  constructor(private cartService: CartService, private route: ActivatedRoute
+    ) {
+  }
+
   //Increasing the amount of items
   inc(i) {
     //console.log(i);
@@ -68,38 +69,12 @@ export class ProductComponent implements OnInit {
   }
  
   
-/*
-  itemsCart: any = [];
-  addCart(catagory){
-    let cartDataNull = localStorage.getItem('localCart');
-    if(cartDataNull==null){
-      let storeDataGet: any =[];
-      storeDataGet.push(catagory);
-      localStorage.setItem('localCart', JSON.stringify(storeDataGet));
-    } else {
-      var id = catagory.prodId;
-      let index:number = 1;
-      this.itemsCart = JSON.parse(localStorage.getItem('localcart'));
-      for(let i=0; i<this.itemsCart.length; i++){
-        if(parseInt(id) === parseInt(this.itemsCart[i].prodId)) {
-          this.itemsCart[i].qnt = catagory.qnt;
-          index = i;
-          break;
-        }
-      } 
-        if (index==-1){
-            this.itemsCart.push(catagory);
-            localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
-        }
-        else{
-          localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
-        }
-      }
-      localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
-    }
- 
-*/
-  ngOnInit(): void {
+  ngOnInit() {
+    this.names = this.cartService.getProducts();
+  }
+
+  onProductSelected (name: Names){
+    this.selectedProduct.emit(name);
   }
 
   onUpdatePriceFrom(event: any) {

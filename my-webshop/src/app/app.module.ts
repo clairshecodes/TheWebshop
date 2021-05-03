@@ -19,6 +19,8 @@ import { ItemComponent } from './cart/item/item.component';
 import {FilterPipe} from './filter.pipe';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CartService } from './cart/cart.service';
+import { ProductItemComponent } from './product/product-item/product-item.component';
 
     //Angular material
 
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
     ConfirmationComponent,
     MainComponent,
     ItemComponent,
-    FilterPipe
+    FilterPipe,
+    ProductItemComponent
   ],
   imports: [
     //Angular material
@@ -61,7 +64,7 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

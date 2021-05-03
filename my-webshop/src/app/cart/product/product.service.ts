@@ -11,7 +11,11 @@ export class ProductService{
           return this.names.slice();
       }
 
-    updateTotal(updatePrice: number, updateQuant: number){
+      addProduct(product: Names){
+        this.product.push(product);
+
+      }
+    onUpdateTotal(updatePrice: number, updateQuant: number){
         return this.totalAmount += updatePrice * updateQuant;
       }
 }
