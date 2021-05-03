@@ -1,36 +1,35 @@
-<div class="row" style=" background-color:#7290AC">
-  <!--Here is where the items will show-->
-  <div class="cart-item col_middle text-center " *ngFor="let item of items" style="color:white " >
-    <div class="rounded mx-auto d-block"  style=" background-color:#425D77">
-      <div>
-      <h4>{{ item.name }}</h4>
-      <span>Price of Item: {{ item.price | currency }}</span>
-      <br>
-      <img
-      [src]="item.imagePath" alt="{{item.imagePath}}" style="width: 220px; height:234px"
-      >
-      <br>
-      <span>Amount of Items: {{item.qnt}} </span>
-      </div>
+<div class="container mt-2">
+    <div *ngIf="(basket$ | async) === null">
+        <p>There are no items in your basket</p>
     </div>
-  </div>
-  <!-- Here is where the total price will show-->
-  <div class="split right" >
-    <div class="centered " >
-        <h4>PRIS I ALT</h4> 
-        <h5>(inklusiv mom)</h5>
-        <h4>75Kr</h4>
-        <button type="button" class="btn">Videre</button>
-    </div>
-  </div>
-<!--
-  <div class="col-sm-2 col_price split right" style=" background-color:#425D77">
-      
-    <h4 style="color:white"> Price in total</h4>
-    <h5 style="color:white">To</h5>
-    <button type="button" class="btn">Filter</button>
-    <br>
-    <br>
-  </div>-->
 
+    <div *ngIf="basket$ | async">
+        <div class="pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 py-5 mb-1">
+                        <app-basket-summary 
+                            (decrement)="decrementItemQuantity($event)"
+                            (increment)="incrementItemQuantity($event)"
+                            (remove)="removeBasketItem($event)"
+                            [items]="(basket$ | async).items"></app-basket-summary>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6 offset-6">
+                        <app-order-totals 
+                            *ngIf="(basketTotals$ | async)"
+                            [shippingPrice]="(basketTotals$ | async).shipping"
+                            [subtotal]="(basketTotals$ | async).subtotal" 
+                            [total]="(basketTotals$ | async).total">
+                        </app-order-totals>
+                        <a routerLink="/checkout" class="btn btn-outline-primary py-2 btn-block">
+                            Proceed to checkout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
