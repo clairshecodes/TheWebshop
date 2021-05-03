@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AccountService } from '../account/account.service';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { AccountService } from '../authentication/authentication.service';
 import { BasketService } from '../cart/cart.service';
 import { Observable } from 'rxjs';
 import { IBasketTotals } from '../shared/models/cart';
