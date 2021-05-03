@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {any} from "codelyzer/util/function";
+import {any} from 'codelyzer/util/function';
 
 
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
-  styles: []
+  styleUrls: ['./log-in.component.css']
 })
 export class LogInComponent implements OnInit {
   // ViewChild gives us access to the Form.
