@@ -3,7 +3,7 @@ import { CartService } from 'src/app/cart/cart.service';
 import { Observable } from 'rxjs';
 import { ICart } from 'src/app/shared/models/cart';
 import { IUser } from 'src/app/shared/models/user';
-import { authenticationService } from 'src/app/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
 
 @Component({
   selector: 'app-nav-bar',

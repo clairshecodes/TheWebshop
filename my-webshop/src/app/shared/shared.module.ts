@@ -10,6 +10,7 @@ import {CdkStepperModule} from '@angular/cdk/stepper';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from '../app.module';
 
 @NgModule({
   declarations: [PagingHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent, StepperComponent, CartSummaryComponent],
@@ -21,7 +22,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     FormsModule,
     CdkStepperModule,
-    RouterModule
+    RouterModule,
+    AppRoutingModule
   ],
   exports: [
     PaginationModule,

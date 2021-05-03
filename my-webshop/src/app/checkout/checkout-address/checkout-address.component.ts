@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { authenticationService } from 'src/app/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { IAddress } from 'src/app/shared/models/address';
 
