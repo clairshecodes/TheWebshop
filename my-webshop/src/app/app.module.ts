@@ -1,65 +1,33 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import {HeaderComponent} from './header/header.component'
+
 import { AppComponent } from './app.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
-import { SignUpComponent } from './authentication/sign-up/sign-up.component';
-import { LogInComponent } from './authentication/log-in/log-in.component';
+import { RegisterComponent } from './account/register/register.component';
+import { LoginComponent } from './account/login/login.component';
 import { CartComponent } from './cart/cart.component';
-import { ProductComponent } from './cart/product/product.component';
-import { AddCartComponent } from './cart/add-cart/add-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { PaymentComponent } from './checkout/payment/payment.component';
 import { ConfirmationComponent } from './checkout/confirmation/confirmation.component';
-import {Routes, RouterModule} from "@angular/router";
-import { FormsModule } from '@angular/forms';
-import { MainComponent } from './main/main.component';
-import { ItemComponent } from './cart/item/item.component';
-import {FilterPipe} from './filter.pipe';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-    //Angular material
-
-const appRoutes: Routes = [
-  {path: 'checkout', component: CheckoutComponent},
-  {path: 'cart', component: CartComponent},
-  {path: 'main', component: MainComponent},
-  {path: 'authentication', component: AuthenticationComponent},
-  {path: 'main', component: MainComponent},
-  {path: 'login', component: LogInComponent},
-  {path: 'product', component: ProductComponent}
-
-];
+import { AddressComponent } from './checkout/address/address.component';
+import { ItemsComponent } from './items/items.component';
+import { DetailsComponent } from './items/details/details.component';
+import { ItemComponent } from './items/item/item.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    AuthenticationComponent,
-    SignUpComponent,
-    LogInComponent,
+    RegisterComponent,
+    LoginComponent,
     CartComponent,
-    ProductComponent,
-    AddCartComponent,
-    CheckoutComponent,
-    PaymentComponent,
+    //CheckoutComponent,
     ConfirmationComponent,
-    MainComponent,
+    AddressComponent,
+    ItemsComponent,
+    DetailsComponent,
     ItemComponent,
-    FilterPipe
   ],
   imports: [
-    //Angular material
-  
-    FormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    BrowserModule,
-    FormsModule,
-    RouterModule.forRoot(appRoutes)
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
