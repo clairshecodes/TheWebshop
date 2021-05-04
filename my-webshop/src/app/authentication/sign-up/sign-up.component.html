@@ -1,58 +1,58 @@
-<form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <h1>New Account</h1>
-      <p><label>First Name</label>*</p>
-      <input type="text" formControlName="firstName" class="form-control"/>
-      <div class="invalid-feedback">
-      </div>
-    </div>
-  
-    <div class="form-group">
-      <p><label>Last Name</label>*</p>
-      <input type="text" formControlName="lastName" class="form-control"/>
-      <div class="invalid-feedback">
-      </div>
-    </div>
-  
-    <div class="form-group">
-      <p><label>Birthday</label>(optional)</p>
-      <input type="date" formControlName="username" class="form-control"/>
-      <div class="invalid-feedback">
-      </div>
-    </div>
-  
-    <div class="form-group">
-      <p><label>E-mail</label>*</p>
-      <input type="email" formControlName="username" class="form-control"/>
-      <div class="invalid-feedback">
-      </div>
-    </div>
-  
-    <div class="form-group">
-      <p><label>Username</label>*</p>
-      <input type="text" formControlName="username" class="form-control"/>
-      <div class="invalid-feedback">
-      </div>
-    </div>
-  
-    <div class="form-group">
-      <p><label>Password</label>*</p>
-      <input type="password" formControlName="password" class="form-control"
-             placeholder="Password must be at least 6 characters"/>
-      <div class="invalid-feedback">
-      </div>
-  
-  
-    </div>
-    <div class="form-group">
-      <button class="btn btn-primary">
-        <span></span>
-        Register
-      </button>
-      <a routerLink="/login" class="btn btn-link">Cancel</a>
-    </div>
+<p>log-in works!</p>
+<mat-card>
+  <form (submit)="signUpUser(signUpUser)" #signUpUser="ngForm">
+
+ 
+    <mat-form-field class="example-full-width">
+      <mat-label>Name</mat-label>
+      <input matInput
+       placeholder="input your correct name" 
+       name="firstname"
+       required
+       minlength="2"
+       [ngModel]='user.firstname'
+       #entereTitle="ngModel">
+      <mat-error *ngIf="entereTitle.invalid">Enter your name</mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>LastName</mat-label>
+      <input matInput
+       placeholder="input your correct family name" 
+       name="lastname"
+       required
+       minlength="2"
+       [ngModel]='user.lastname'
+       #entereTitle="ngModel">
+      <mat-error *ngIf="entereTitle.invalid">Family name:</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>UserName</mat-label>
+        <input matInput
+         placeholder="input your username" 
+         name="username"
+         required
+         minlength="2"
+         [ngModel]='user.username'
+         #entereTitle="ngModel">
+        <mat-error *ngIf="entereTitle.invalid">Enter a name which present you</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>LastName</mat-label>
+        <input matInput
+         placeholder="input your correct family name" 
+         name="lastname"
+         required
+         minlength="2"
+         [ngModel]='user.lastname'
+         #entereTitle="ngModel">
+        <mat-error *ngIf="entereTitle.invalid">Family name:</mat-error>
+      </mat-form-field>
+    <hr/>
+    <button mat-icon-button
+    type="submit"  	>
+      <mat-icon>login</mat-icon>
+    </button>
   </form>
-  
-  
-  
-  
+</mat-card>
+

@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import {HeaderComponent} from './header/header.component'
 import {AppComponent} from './app.component';
 import {AuthenticationComponent} from './authentication/authentication.component';
-import {SignUpComponent} from './authentication/sign-up/sign-up.component';
 import {LogInComponent} from './authentication/log-in/log-in.component';
 import {CartComponent} from './cart/cart.component';
 import {ProductComponent} from './cart/product/product.component';
@@ -20,6 +19,7 @@ import {ItemComponent} from './cart/item/item.component';
 import {FilterPipe} from './filter.pipe';
 import {AppRoutingModule} from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {SignUpComponent} from './authentication/sign-up/sign-up.component'
 
     //Angular material
 
@@ -40,7 +40,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
     AppComponent,
     HeaderComponent,
     AuthenticationComponent,
-    SignUpComponent,
     LogInComponent,
     CartComponent,
     ProductComponent,
@@ -50,7 +49,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ConfirmationComponent,
     MainComponent,
     ItemComponent,
-    FilterPipe
+    FilterPipe,
+    SignUpComponent
   ],
   imports: [
     //Angular material
