@@ -10,9 +10,6 @@ import { CartService } from '../cart/cart.service';
 })
 export class CheckoutComponent implements OnInit {
   shippingCosts = this.cartService.getShippingPrices();
-  total(){
-    return this.cartService.total();
-  }
 
   constructor(private cartService: CartService) { }
 

@@ -16,8 +16,6 @@ import {HttpClient, HttpClientModule} from '@angular/common/http'
     getShippingPrices(){
       return this.http.get<{type: string, price: number}[]>('/assets/shipping.json');
     }
-
-
       addToCart(product) {
         this.items.push(product);
       } 

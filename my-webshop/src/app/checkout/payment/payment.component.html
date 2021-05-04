@@ -12,7 +12,8 @@
     <h4>Kontrolcifre*</h4>
     <input>
     <h4>Gem oplysninger til fremtidig brug</h4>
-    <button type="button" class="btn">Basic</button>
+    <form #postForm="ngForm" (ngSubmit)="onAdd(postForm.value)">
+    <button type="button" class="btn">Basic</button> </form>
     </div>
 </div>
 <div class="split right">
