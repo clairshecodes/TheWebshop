@@ -10,9 +10,9 @@ import {any} from 'codelyzer/util/function';
   styleUrls: ['./log-in.component.css']
 })
 export class LogInComponent implements OnInit {
-  // ViewChild gives us access to the Form.
+/*  // ViewChild gives us access to the Form.
 //  @ViewChild('f', {static: false}) sgnForm: NgForm;
-  /*defaultQuestion = 'pet';
+  /!*defaultQuestion = 'pet';
   answer = '';
   genders = ['male', 'female'];
   /!*In order to only ouput only some specifik data,
@@ -66,7 +66,7 @@ export class LogInComponent implements OnInit {
      this.user.gender = this.signupForm.value.gender;
      this.signupForm.reset();*!/
     console.log(this.sgnForm.value);
-  }*/
+  }*!/
   genders = ['male', 'female'];
   signupForm: FormGroup;
   forbiddenUsernames = ['Chris', 'Anna'];
@@ -81,9 +81,9 @@ export class LogInComponent implements OnInit {
       gender: new FormControl('male')
     });
     //A Form state you can track in generel. Valuechanges is an observable. Everytime form changes it ouput every single change.
-    /* this.signupForm.valueChanges.subscribe(
+    /!* this.signupForm.valueChanges.subscribe(
        (value) => console.log(value)
-     );*/
+     );*!/
 
     //Status changes, with this we can view states that changes. Nice observable, allowing you to see whant is happening in your form.
     this.signupForm.statusChanges.subscribe(
@@ -118,5 +118,9 @@ export class LogInComponent implements OnInit {
     });
     return promise;
 
-  }
+  }*/
+
+
+
 }
+
