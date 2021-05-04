@@ -1,3 +1,4 @@
+<form #postForm="ngForm" (ngSubmit)="onAdd(postForm.value)">
 <div class="centered container">
     <div>
         <br>
@@ -12,8 +13,8 @@
     <h4>Kontrolcifre*</h4>
     <input>
     <h4>Gem oplysninger til fremtidig brug</h4>
-    <form #postForm="ngForm" (ngSubmit)="onAdd(postForm.value)">
-    <button type="button" class="btn">Basic</button> </form>
+    <button type="button" class="btn">Save</button>
+
     </div>
 </div>
 <div class="split right">
@@ -23,3 +24,4 @@
         <h4>{{total()}}kr.</h4>
     </div>
 </div>
+</form>
