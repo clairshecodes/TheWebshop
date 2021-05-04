@@ -43,7 +43,6 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     HeaderComponent
   ],
   imports: [
-    //Angular material
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -54,7 +53,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatExpansionModule,
     MatCardModule,
     MatFormFieldModule,
-    //RouterModule.forRoot(appRoutes)
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

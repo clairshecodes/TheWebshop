@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
 
 @Component({
   selector: 'app-add-cart',
   templateUrl: './add-cart.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class AddCartComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
