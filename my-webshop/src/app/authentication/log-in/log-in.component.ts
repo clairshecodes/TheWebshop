@@ -1,11 +1,10 @@
-export class LogInComponent {
-  userName = "";
-  passWord = "";
+import {Component} from '@angular/core';
 
-  onAddPost(){
-    const logIn : LogIn = {
-      userName: this.userName,
-      passWord: this.passWord
-    };
-  }
+
+@Component({
+  selector: 'app-log-in',
+  templateUrl: './log-in.component.html',
+  styleUrls: ['log-in.component.css']
+})
+export class LogInComponent{
 }

@@ -20,6 +20,9 @@ import {FilterPipe} from './filter.pipe';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatCardModule} from "@angular/material/card";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 
 @NgModule({
@@ -47,7 +50,10 @@ import { HeaderComponent } from './header/header.component';
     HttpClientModule,
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatFormFieldModule,
     //RouterModule.forRoot(appRoutes)
   ],
   providers: [],
