@@ -14,7 +14,7 @@ export class LogInComponent implements OnInit {
   genders = ['male', 'female'];
   signupForm: FormGroup;
   forbiddenUsernames = ['Chris', 'Anna'];
- 
+
 
   // in here we initialize our form
   ngOnInit() {
@@ -40,6 +40,5 @@ export class LogInComponent implements OnInit {
       console.log(posts);
     });
   }
- 
 }
 
