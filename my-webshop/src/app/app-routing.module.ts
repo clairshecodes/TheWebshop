@@ -17,6 +17,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LogInComponent},
   {path: 'signup', component: SignUpComponent},
   {path: 'authentication', component: AuthenticationComponent},
+  {path: 'shipping', component: CheckoutComponent}
 ];
 
 @NgModule({

@@ -1,3 +1,10 @@
+
 <app-payment></app-payment>
 
-
+<div class="shipping-item centered container" *ngFor="let shipping of shippingCosts | async"  >
+    <button type="button" class="btn" style=" background-color:#7f9c7f">
+         <span>{{ shipping.type }}</span>
+        <span>{{ shipping.price | currency }}</span>
+        <br>
+        </button>
+</div>

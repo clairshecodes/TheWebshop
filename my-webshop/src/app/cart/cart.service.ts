@@ -13,40 +13,14 @@ import {HttpClient, HttpClientModule} from '@angular/common/http'
     //basket$ = this.basketSource.asObservable();
     items = [];
 
-   /* getItems() {
-      return this.basketSource;
+    getShippingPrices(){
+      return this.http.get<{type: string, price: number}[]>('/assets/shipping.json');
     }
 
-    addItemToBasket(item: Names) {
-      const itemToAdd: IBasketItem = this.mapProductItemToBasketItem(item, quantity);
-      const basket = this.getCurrentBasketValue() ?? this.createBasket();
-      basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity);
-      this.setBasket(basket);
-    }
-    getCurrentBasketValue() {
-      return this.basketSource.value;
-    }  
-    private calculateTotals() {
-      const basket = this.getCurrentBasketValue();
-      //const shipping = this.shipping;
-      const subtotal = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
-      //const total = subtotal + shipping;
-      //this.basketTotalSource.next({shipping, total, subtotal});
-    }
-    */
 
       addToCart(product) {
         this.items.push(product);
-      }
-
-      /*
-      removeFromCart(product) {
-        this.items.slice(product);
-      } */
-
-      /*getCurrentBasketValue() {
-        return this.basketSource.value;
-      }*/    
+      } 
     
       getItems() {
         return this.items;

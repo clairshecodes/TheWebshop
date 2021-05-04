@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../cart/cart.service';
+
 
 @Component({
   selector: 'app-checkout',
@@ -7,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class CheckoutComponent implements OnInit {
+  shippingCosts = this.cartService.getShippingPrices();
+  total(){
+    return this.cartService.total();
+  }
 
-  constructor() { }
+  constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
   }
