@@ -1,76 +1,53 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { TestErrorComponent } from './core/test-error/test-error.component';
-import { ServerErrorComponent } from './core/server-error/server-error.component';
-import { NotFoundComponent } from './core/not-found/not-found.component';
-import { AuthGuard } from './core/guards/auth.guard';
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
-import {
-  MatInputModule,
-  MatCardModule,
-  MatButtonModule,
-  MatToolbarModule,
-  MatExpansionModule
-} from "@angular/material";
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { SignUpComponent } from './authentication/sign-up/sign-up.component';
+import { LogInComponent } from './authentication/log-in/log-in.component';
+import { CartComponent } from './cart/cart.component';
+import { ProductComponent } from './product/product.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { PaymentComponent } from './checkout/payment/payment.component';
+import { ConfirmationComponent } from './checkout/confirmation/confirmation.component';
+import {AppRoutingModule} from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MainComponent } from './main/main.component';
+import {FilterPipe} from './filter.pipe';
 
 
-import { AppComponent } from "./app.component";
-import { PostCreateComponent } from "./posts/post-create/post-create.component";
-import { HeaderComponent } from "./header/header.component";
-import { PostListComponent } from "./posts/post-list/post-list.component";
 
-const routes: Routes = [
-  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
-  { path: 'test-error', component: TestErrorComponent, data: { breadcrumb: 'Test Errors' } },
-  { path: 'server-error', component: ServerErrorComponent, data: { breadcrumb: 'Server Error' } },
-  { path: 'not-found', component: NotFoundComponent, data: { breadcrumb: 'Not Found' } },
-  { path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule), data: { breadcrumb: 'Shop' } },
-  { path: 'cart', loadChildren: () => import('./cart/cart.module').then(mod => mod.CartModule), data: { breadcrumb: 'Cart' } },
-  {
-    path: 'checkout',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./checkout/checkout.module')
-      .then(mod => mod.CheckoutModule), data: { breadcrumb: 'Checkout' }
-  },
-  {
-    path: 'orders',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./orders/orders.module')
-      .then(mod => mod.OrdersModule), data: { breadcrumb: 'Orders' }
-  },
-  {
-    path: 'authentication',
-    loadChildren: () => import('./authentication/authentication.module')
-      .then(mod => mod.AuthenticationModule), data: { breadcrumb: { skip: true } }
-  },
-  { path: '**', redirectTo: 'not-found', pathMatch: 'full' }
-];
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostCreateComponent,
-    HeaderComponent,
-    PostListComponent
+    AuthenticationComponent,
+    SignUpComponent,
+    LogInComponent,
+    CartComponent,
+    ProductComponent,
+    CheckoutComponent,
+    PaymentComponent,
+    ConfirmationComponent,
+    MainComponent,
+    FilterPipe,
+    HeaderComponent
   ],
   imports: [
-    BrowserModule,
+    //Angular material
+    AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatInputModule,
-    MatCardModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatExpansionModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule
+    //RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
-  exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppModule { }
