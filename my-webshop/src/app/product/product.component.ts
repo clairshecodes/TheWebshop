@@ -1,8 +1,10 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {Names } from './product.model';
-import {ProductService} from './product.service';
-import { CartService } from '../cart.service';
+import {Product } from 'src/app/models/product.model';
+
+
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
+import { ProductService } from 'src/app/services/product.service';
 
 
 @Component({
@@ -22,14 +24,10 @@ export class ProductComponent implements OnInit {
   constructor(
     private productService: ProductService, private cartService: CartService, private route: ActivatedRoute
     ) {
-    this.names = this.productService.getProduct();
+    this.products = this.productService.getProduct();
   }
  
-  myImage: string = "assets/image/sweatshirt.jpg";
-  priceRangeFrom = '50kr';
-  priceRangeTo = '5000kr';
-  pricing = "something kr.";
-  names: Names[];
+  products: Product[];
 
   Up(i){
     i.qnt;
@@ -55,15 +53,4 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onUpdatePriceFrom(event: any) {
-    this.priceRangeFrom = (event.target as HTMLInputElement).value;
-  }
-
-  onUpdatePriceTo(event: any) {
-    this.priceRangeTo = (event.target as HTMLInputElement).value;
-  }
-
-  onUpdatePricing(event: any) {
-    this.pricing = (event.target as HTMLInputElement).value;
-  }
 }

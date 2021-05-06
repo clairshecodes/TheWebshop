@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http'
 
-
-
-
-
 @Injectable({
     providedIn: 'root'
   })
@@ -13,9 +9,10 @@ import {HttpClient, HttpClientModule} from '@angular/common/http'
     //basket$ = this.basketSource.asObservable();
     items = [];
 
+    /*
     getShippingPrices(){
       return this.http.get<{type: string, price: number}[]>('/assets/shipping.json');
-    }
+    }*/ 
       addToCart(product) {
         this.items.push(product);
       } 
@@ -55,6 +52,13 @@ import {HttpClient, HttpClientModule} from '@angular/common/http'
           }
         } else {
           item.qnt--;
+        }
+      }
+
+      incrementInCart(item){
+        console.log('increment item', item);
+        if (item.qnt !== 5 ){
+          item.qnt += 1;
         }
       }
     constructor(private http: HttpClient) {}

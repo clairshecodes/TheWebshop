@@ -6,15 +6,13 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { LogInComponent } from './authentication/log-in/log-in.component';
 import { CartComponent } from './cart/cart.component';
-import { ProductComponent } from './cart/product/product.component';
-import { AddCartComponent } from './cart/add-cart/add-cart.component';
+import { ProductComponent } from './product/product.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentComponent } from './checkout/payment/payment.component';
 import { ConfirmationComponent } from './checkout/confirmation/confirmation.component';
 import {AppRoutingModule} from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
-import { ItemComponent } from './cart/item/item.component';
 import {FilterPipe} from './filter.pipe';
 
 
@@ -31,12 +29,10 @@ import { HeaderComponent } from './header/header.component';
     LogInComponent,
     CartComponent,
     ProductComponent,
-    AddCartComponent,
     CheckoutComponent,
     PaymentComponent,
     ConfirmationComponent,
     MainComponent,
-    ItemComponent,
     FilterPipe,
     HeaderComponent
   ],

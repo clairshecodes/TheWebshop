@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from 'src/app/cart/cart.service';
+import { CartService } from 'src/app/services/cart.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { Observable } from 'rxjs';
-import { AngularFireDatabase } from '@angular/fire/database';
+
 
 @Component({
   selector: 'app-payment',
@@ -18,7 +16,6 @@ export class PaymentComponent implements OnInit {
   constructor(private cartService: CartService, private http: HttpClient) { 
 
   }
-
   ngOnInit() {
     console.log("Start");
     this.fetchPosts();

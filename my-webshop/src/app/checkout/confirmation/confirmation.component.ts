@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -8,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cartService: CartService) { }
+  total(){
+    return this.cartService.total();
+  }
+  items = this.cartService.getItems();
+
 
   ngOnInit(): void {
   }

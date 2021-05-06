@@ -22,8 +22,8 @@ export class LogInComponent implements OnInit {
   }
 
   constructor(private http: HttpClient) {}
-  onSubmit(postData: { title: string; content: string }) {
-    // Send Http request
+  
+  onSubmit(postData) {
     this.http
       .post(
         'https://webshop-dtu-default-rtdb.firebaseio.com/posts.json',
@@ -40,6 +40,4 @@ export class LogInComponent implements OnInit {
       console.log(posts);
     });
   }
- 
 }
-
