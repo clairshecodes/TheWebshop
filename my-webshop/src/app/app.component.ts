@@ -1,39 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from './cart/cart.service';
-import { AuthenticationService } from './authentication/authentication.service';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'Jades Design';
+export class AppComponent {
+ /* title = 'JaDes Webshop';
+  clothesName = 'Search';
+  characters = [
+    'Sweatshirt',
+    'Jackets',
+    'Dresses',
+    'Co-Ords'
+  ];
+  collapsed = true;
+  searchText = 'Search';*/
 
-  constructor(private cartService: CartService, private authenticationService: AuthenticationService) { }
-
-  ngOnInit(): void {
-    this.loadCart();
-    this.loadCurrentUser();
-  }
-
-  loadCurrentUser() {
-    const token = localStorage.getItem('token');
-    this.authenticationService.loadCurrentUser(token).subscribe(() => {
-      console.log('loaded user');
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  loadCart() {
-    const cartId = localStorage.getItem('cart_id');
-    if (cartId) {
-      this.cartService.getCart(cartId).subscribe(() => {
-        console.log('initialised cart');
-      }, error => {
-        console.log(error);
-      });
-    }
-  }
 }

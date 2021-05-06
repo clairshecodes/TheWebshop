@@ -1,162 +1,65 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { ICart, ICartItem, Cart, ICartTotals } from '../shared/models/cart';
-import { map } from 'rxjs/operators';
-import { IProduct } from '../shared/models/product';
-import { IDeliveryMethod } from '../shared/models/deliveryMethod';
+import {HttpClient, HttpClientModule} from '@angular/common/http'
 
 @Injectable({
-  providedIn: 'root'
-})
-export class CartService {
-  [x: string]: any;
-  baseUrl = environment.apiUrl;
-  private CartSource = new BehaviorSubject<ICart>(null);
-  cart$ = this.CartSource.asObservable();
-  private cartTotalSource = new BehaviorSubject<ICartTotals>(null);
-  cartTotal$ = this.cartTotalSource.asObservable();
-  shipping = 0;
-  cartSource: any;
+    providedIn: 'root'
+  })
+  export class CartService {
+    //private basketSource = new BehaviorSubject<IBasket>(null);
+    //basket$ = this.basketSource.asObservable();
+    items = [];
 
-  constructor(private http: HttpClient) { }
-
-  createPaymentIntent() {
-    return this.http.post(this.baseUrl + 'payments/' + this.getCurrentCartValue().id, {})
-      .pipe(
-        map((cart: ICart) => {
-          this.cartSource.next(cart);
-        })
-      );
-  }
-
-  setShippingPrice(deliveryMethod: IDeliveryMethod) {
-    this.shipping = deliveryMethod.price;
-    const cart = this.getCurrentCartValue();
-    cart.deliveryMethodId = deliveryMethod.id;
-    cart.shippingPrice = deliveryMethod.price;
-    this.calculateTotals();
-    this.setCart(Cart);
-  }
-
-  getCart(id: string) {
-    return this.http.get(this.baseUrl + 'cart?id=' + id)
-      .pipe(
-        map((cart: ICart) => {
-          this.cartSource.next(Cart);
-          this.shipping = Cart.shippingPrice;
-          this.calculateTotals();
-        })
-      );
-  }
-
-  setcart(cart: ICart) {
-    return this.http.post(this.baseUrl + 'cart', Cart).subscribe((response: ICart) => {
-      this.cartSource.next(response);
-      this.calculateTotals();
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  getCurrentCartValue() {
-    return this.cartSource.value;
-  }
-
-  addItemToCart(item: IProduct, quantity = 1) {
-    const itemToAdd: ICartItem = this.mapProductItemToCartItem(item, quantity);
-    let cart = this.getCurrentCartValue();
-    if (cart === null) {
-      cart = this.createCart();
-    }
-    cart.items = this.addOrUpdateItem(cart.items, itemToAdd, quantity);
-    this.setCart(cart);
-  }
-  setCart(cart: any) {
-    throw new Error('Method not implemented.');
-  }
-
-  incrementItemQuantity(item: ICartItem) {
-    const cart = this.getCurrentCartValue();
-    const foundItemIndex = cart.items.findIndex(x => x.id === item.id);
-    cart.items[foundItemIndex].quantity++;
-    this.setCart(cart);
-  }
-
-  decrementItemQuantity(item: ICartItem) {
-    const cart = this.getCurrentCartValue();
-    const foundItemIndex = cart.items.findIndex(x => x.id === item.id);
-    if (cart.items[foundItemIndex].quantity > 1) {
-      cart.items[foundItemIndex].quantity--;
-      this.setCArt(cart);
-    } else {
-      this.removeItemFromCart(item);
-    }
-  }
-
-  removeItemFromCart(item: ICartItem) {
-    const cart = this.getCurrentCartValue();
-    if (cart.items.some(x => x.id === item.id)) {
-      cart.items = cart.items.filter(i => i.id !== item.id);
-      if (cart.items.length > 0) {
-        this.setCart(cart);
-      } else {
-        this.deleteCart(cart);
+    /*
+    getShippingPrices(){
+      return this.http.get<{type: string, price: number}[]>('/assets/shipping.json');
+    }*/
+      addToCart(product) {
+        this.items.push(product);
       }
-    }
-  }
 
-  deleteLocalCart(id: string) {
-    this.cartSource.next(null);
-    this.cartTotalSource.next(null);
-    localStorage.removeItem('cart_id');
-  }
+      getItems() {
+        return this.items;
+      }
 
-  deleteCart(cart: ICart) {
-    return this.http.delete(this.baseUrl + 'cart?id=' + cart.id).subscribe(() => {
-      this.cartSource.next(null);
-      this.cartTotalSource.next(null);
-      localStorage.removeItem('cart_id');
-    }, error => {
-      console.log(error);
-    });
-  }
+      clearCart() {
+        this.items = [];
+        return this.items;
+      }
 
-  private calculateTotals() {
-    const cart = this.getCurrentCartValue();
-    const shipping = this.shipping;
-    const subtotal = cart.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
-    const total = subtotal + shipping;
-    this.cartTotalSource.next({shipping, total, subtotal});
-  }
+      updateCart(price:number, qnt:number){
+        return this.items.push(price += price*qnt);
+      }
 
-  private addOrUpdateItem(items: ICartItem[], itemToAdd: ICartItem, quantity: number): ICartItem[] {
-    const index = items.findIndex(i => i.id === itemToAdd.id);
-    if (index === -1) {
-      itemToAdd.quantity = quantity;
-      items.push(itemToAdd);
-    } else {
-      items[index].quantity += quantity;
-    }
-    return items;
-  }
+      total(){
+        let total = 0;
+        for (let i=0; i<this.items.length; i++){
+          total += this.items[i].price * this.items[i].qnt;
+        }
+        console.log('Total in cart:', total);
+        //return total.toFixed(2);
+        return total;
+      }
 
-  private createCart(): ICart {
-    const cart = new Cart();
-    localStorage.setItem('cart_id', cart.id);
-    return cart;
-  }
+      removeFromCart(item){
+        console.log('Removing Item:', item);
+        if (item.qnt ===1){
+          for(let i = 0; i<this.items.length; i++){
+            if(this.items[i].prodId===item.prodId){
+              this.items.splice(item, 1);
+              console.log('This element is deleted:', item);
+              return
+            }
+          }
+        } else {
+          item.qnt--;
+        }
+      }
 
-  private mapProductItemToCartItem(item: IProduct, quantity: number): ICartItem {
-    return {
-      id: item.id,
-      productName: item.name,
-      price: item.price,
-      pictureUrl: item.pictureUrl,
-      quantity,
-      brand: item.productBrand,
-      type: item.productType
-    };
+      incrementInCart(item){
+        console.log('increment item', item);
+        if (item.qnt !== 5 ){
+          item.qnt += 1;
+        }
+      }
+    constructor(private http: HttpClient) {}
   }
-}

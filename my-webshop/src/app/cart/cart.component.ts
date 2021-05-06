@@ -1,34 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ICart, ICartItem, ICartTotals } from '../shared/models/cart';
-import { CartService } from './cart.service';
+import {CartService} from '../services/cart.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['/cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cart$: Observable<ICart>;
-  cartTotals$: Observable<ICartTotals>;
+  items = this.cartService.getItems();
+
+  //Total price
+  total(){
+    return this.cartService.total();
+  }
+
+  //Increments item in cart
+  incrementInCart(product){
+    this.cartService.incrementInCart(product);
+  }
+
+  //remove item from cart
+  removeFromCart(product){
+    this.cartService.removeFromCart(product);
+    window.alert('Item has been removed');
+  }
 
   constructor(private cartService: CartService) { }
 
-  ngOnInit() {
-    this.cart$ = this.cartService.cart$;
-    this.cartTotals$ = this.cartService.cartTotal$;
-  }
-
-  removeCartItem(item: ICartItem) {
-    this.cartService.removeItemFromCart(item);
-  }
-
-  incrementItemQuantity(item: ICartItem) {
-    this.cartService.incrementItemQuantity(item);
-  }
-
-  decrementItemQuantity(item: ICartItem) {
-    this.cartService.decrementItemQuantity(item);
+  ngOnInit(): void {
   }
 
 }
