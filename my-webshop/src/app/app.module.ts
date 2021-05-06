@@ -18,6 +18,7 @@ import { ItemComponent } from './cart/item/item.component';
 import {FilterPipe} from './filter.pipe';
 
 
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 
