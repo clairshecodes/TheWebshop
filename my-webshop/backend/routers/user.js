@@ -5,10 +5,17 @@ const mongoose = require('mongoose')
 const bcryptjs = require('bcryptjs')
 const jwt =require('jsonwebtoken')
 
+//add new user
+//http://localhost:3000/api/users/register POST
 router.post('/',async(req,res,next)=>{
+    console.log(req.body)
     const user= new User({
-        name:req.body.name,
+        firstname:req.body.firstname,
+        lastname:req.body.lastname,
+        username:req.body.username,
+        token:req.body.token,
         email:req.body.email,
+
         passwordHash:bcryptjs.hashSync(req.body.password,10),
         street:req.body.street,
         apartment:req.body.apartment,
@@ -18,26 +25,29 @@ router.post('/',async(req,res,next)=>{
         phone:req.body.phone,
         isAdmin:req.body.isAdmin
     })
+     User.findOne({email : req.body.email}).then(user =>{
+        return res.status(400).send('The user is allready exists')
+     }).catch(err=>{
+        return res.status(500).send({error:err})
+
+     })
+
     user = await user.save().then(resUser =>{
         if(!resUser){
             return res.status(500).send('user cannot be added')
         }else {
-            return res.send(resUser)
+            return res.status(200).send({user : resUser})
         }
     }).catch(err => {
         res.status(500).json({
             error: err
         })
-    }).catch(err => {
-        res.status(500).json({
-            error: err
-        })
     })
-    
-    
+
 })
 
 //get all users
+//http://localhost:3000/api/users GET
 router.get('/',async (req,res)=>{
     const userList= await User.find().select('-passwordHash')
     if(!userList){
@@ -51,6 +61,7 @@ router.get('/',async (req,res)=>{
     }
 });
 //get User by id
+//http://localhost:3000/api/users/id GET
 router.get('/:id',async (req,res)=>{
     const userById= await User.findById(req.params.id)
     if(!userById){
@@ -64,7 +75,8 @@ router.get('/:id',async (req,res)=>{
     }
 });
 
-//delete a product
+//delete a user
+//http://localhost:3000/api/users DELETE
 router.delete('/:id',(req, res)=>{
     User.findByIdAndRemove(req.params.id).then(user =>{
         if(user){
@@ -85,24 +97,30 @@ router.delete('/:id',(req, res)=>{
         })
     })
 })
-router.post('/login', (req,res)=>{
-     User.findOne({email: req.body.email}).then(user=>{
-        if(!user){
-            return res.status(400).send('the user not found')
-        }
-            if(user && bcryptjs.compareSync(req.body.password,user.passwordHash)){
-                const token=jwt.sign()
-                res.status(200).send('user authenticated ')
-            }else{
-                return res.status(400).send('password is wrong')
-            }
-        
-    }).catch(err =>{
-        return res.status(400).json({
-            error: err
-        })
-    })
-    
+//LOGIN
+// http://localhost:3000/api/users/login POST
+router.post('/login',async (req,res)=>{
+   const user = await User.findOne({email : req.body.email})
+   const secret = process.env.SECRET
+   if(!user){
+       return res.status(200).send({message:'The user not found'})
+   }
+   if(user && bcryptjs.compareSync(req.body.password,user.passwordHash)){
+
+     const token = jwt.sign(
+           {
+               userId : user.id,
+               isAdmin : user.isAdmin
+           },secret,
+           { algorithm: 'HS256'},
+           {
+               expiresIn:'1d'
+           }
+       )
+       res.status(200).send({message:'token',user:user.email,token : token})
+   } else{
+       res.status(200).send({message:'pass is wrong'})
+   }
 })
 
 module.exports= router

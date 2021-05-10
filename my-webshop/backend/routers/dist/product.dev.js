@@ -4,56 +4,60 @@ function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only")
 
 var express = require('express');
 
-var Category = require('../models/category');
-
-var Product = require('../models/product');
+var User = require('../models/user');
 
 var router = express.Router();
 
-var mongoose = require('mongoose'); //add a product
+var mongoose = require('mongoose');
+
+var bcryptjs = require('bcryptjs');
+
+var jwt = require('jsonwebtoken'); //add new user
+//http://localhost:3000/api/users/register POST
 
 
 router.post('/', function _callee(req, res, next) {
-  var category, product;
+  var user;
   return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _context.next = 2;
-          return regeneratorRuntime.awrap(Category.findById(req.body.category).then(function (category) {
-            if (!category) {
-              return res.status(500).send('invalid category ');
-            }
+          console.log(req.body);
+          user = new User({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            username: req.body.username,
+            token: req.body.token,
+            email: req.body.email,
+            passwordHash: bcryptjs.hashSync(req.body.password, 10),
+            street: req.body.street,
+            apartment: req.body.apartment,
+            zip: req.body.zip,
+            city: req.body.city,
+            country: req.body.country,
+            phone: req.body.phone,
+            isAdmin: req.body.isAdmin
+          });
+          User.findOne({
+            email: req.body.email
+          }).then(function (user) {
+            return res.status(400).send('The user is allready exists');
           })["catch"](function (err) {
-            res.status(500).json({
+            return res.status(500).send({
               error: err
             });
-          }));
-
-        case 2:
-          category = _context.sent;
-          product = new Product({
-            name: req.body.name,
-            description: req.body.description,
-            ricDescription: req.body.ricDescription,
-            image: req.body.image,
-            brand: req.body.brand,
-            price: req.body.price,
-            category: req.body.category,
-            countInStock: req.body.countInStock,
-            rating: req.body.rating,
-            numReviews: req.body.numReviews,
-            isFeatured: req.body.isFeatured
           });
 
-          _readOnlyError("product");
+          _readOnlyError("user");
 
-          _context.next = 7;
-          return regeneratorRuntime.awrap(product.save().then(function (product) {
-            if (!product) {
-              return res.status(500).send('product cannot be added');
+          _context.next = 6;
+          return regeneratorRuntime.awrap(user.save().then(function (resUser) {
+            if (!resUser) {
+              return res.status(500).send('user cannot be added');
             } else {
-              return res.send(product);
+              return res.status(200).send({
+                user: resUser
+              });
             }
           })["catch"](function (err) {
             res.status(500).json({
@@ -61,37 +65,38 @@ router.post('/', function _callee(req, res, next) {
             });
           }));
 
-        case 7:
-          product = _context.sent;
+        case 6:
+          user = _context.sent;
 
-        case 8:
+        case 7:
         case "end":
           return _context.stop();
       }
     }
   });
-}); //get all products
+}); //get all users
+//http://localhost:3000/api/users GET
 
 router.get('/', function _callee2(req, res) {
-  var productList;
+  var userList;
   return regeneratorRuntime.async(function _callee2$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.next = 2;
-          return regeneratorRuntime.awrap(Product.find().populate('category'));
+          return regeneratorRuntime.awrap(User.find().select('-passwordHash'));
 
         case 2:
-          productList = _context2.sent;
+          userList = _context2.sent;
 
-          if (!productList) {
+          if (!userList) {
             res.status(500).json({
               success: false
             });
           } else {
             res.status(200).json({
-              message: 'products fetched succesfully',
-              products: productList
+              message: 'users fetched succesfully',
+              users: userList
             });
           }
 
@@ -101,28 +106,30 @@ router.get('/', function _callee2(req, res) {
       }
     }
   });
-}); //get product by id
+}); //get User by id
+//http://localhost:3000/api/users/id GET
 
 router.get('/:id', function _callee3(req, res) {
-  var productList;
+  var userById;
   return regeneratorRuntime.async(function _callee3$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.next = 2;
-          return regeneratorRuntime.awrap(Product.findById(req.params.id).populate('category'));
+          return regeneratorRuntime.awrap(User.findById(req.params.id));
 
         case 2:
-          productList = _context3.sent;
+          userById = _context3.sent;
 
-          if (!productList) {
+          if (!userById) {
             res.status(500).json({
-              success: false
+              success: false,
+              message: 'not user with this id'
             });
           } else {
             res.status(200).json({
               message: 'products fetched succesfully',
-              products: productList
+              user: userById
             });
           }
 
@@ -132,91 +139,20 @@ router.get('/:id', function _callee3(req, res) {
       }
     }
   });
-}); //updating product
-
-router.put('/:id', function _callee4(req, res) {
-  var category, product;
-  return regeneratorRuntime.async(function _callee4$(_context4) {
-    while (1) {
-      switch (_context4.prev = _context4.next) {
-        case 0:
-          if (mongoose.isValidObjectId(req.params.id)) {
-            _context4.next = 2;
-            break;
-          }
-
-          return _context4.abrupt("return", res.status(500).send('invalid productId '));
-
-        case 2:
-          _context4.next = 4;
-          return regeneratorRuntime.awrap(Category.findById(req.body.category).then(function (category) {
-            if (!category) {
-              return res.status(500).send('invalid category ');
-            }
-          })["catch"](function (err) {
-            res.status(500).json({
-              error: err
-            });
-          }));
-
-        case 4:
-          category = _context4.sent;
-          _context4.next = 7;
-          return regeneratorRuntime.awrap(Product.findByIdAndUpdate(req.params.id, {
-            name: req.body.name,
-            description: req.body.description,
-            ricDescription: req.body.ricDescription,
-            image: req.body.image,
-            brand: req.body.brand,
-            price: req.body.price,
-            category: req.body.category,
-            countInStock: req.body.countInStock,
-            rating: req.body.rating,
-            numReviews: req.body.numReviews,
-            isFeatured: req.body.isFeatured
-          }, {
-            "new": true
-          }).then(function (product) {
-            if (product) {
-              return res.status(200).json({
-                success: true,
-                message: 'the product updated',
-                product: product
-              });
-            } else {
-              return res.status(404).json({
-                success: false,
-                message: 'the product not updated'
-              });
-            }
-          })["catch"](function (err) {
-            res.status(500).json({
-              error: err
-            });
-          }));
-
-        case 7:
-          product = _context4.sent;
-
-        case 8:
-        case "end":
-          return _context4.stop();
-      }
-    }
-  });
-}); //delete a product
+}); //delete a user
+//http://localhost:3000/api/users DELETE
 
 router["delete"]('/:id', function (req, res) {
-  Product.findByIdAndRemove(req.params.id).then(function (product) {
-    if (product) {
+  User.findByIdAndRemove(req.params.id).then(function (user) {
+    if (user) {
       return res.status(200).json({
         success: true,
-        message: 'the product removed'
+        message: 'the user removed'
       });
     } else {
       return res.status(404).json({
         success: false,
-        message: 'the product not removed'
+        message: 'the user not removed'
       });
     }
   })["catch"](function (err) {
@@ -225,72 +161,57 @@ router["delete"]('/:id', function (req, res) {
       error: err
     });
   });
-});
-router.get('/get/count', function _callee5(req, res) {
-  var productCount;
-  return regeneratorRuntime.async(function _callee5$(_context5) {
+}); //LOGIN
+// http://localhost:3000/api/users/login POST
+
+router.post('/login', function _callee4(req, res) {
+  var user, secret, token;
+  return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
-      switch (_context5.prev = _context5.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
-          _context5.next = 2;
-          return regeneratorRuntime.awrap(Product.countDocuments(function (count) {
-            return count;
+          _context4.next = 2;
+          return regeneratorRuntime.awrap(User.findOne({
+            email: req.body.email
           }));
 
         case 2:
-          productCount = _context5.sent;
+          user = _context4.sent;
+          secret = process.env.SECRET;
 
-          if (!productCount) {
-            res.status(500).json({
-              success: false
-            });
-          } else {
-            res.send({
-              count: productCount
-            });
+          if (user) {
+            _context4.next = 6;
+            break;
           }
 
-        case 4:
-        case "end":
-          return _context5.stop();
-      }
-    }
-  });
-});
-router.get('/', function _callee6(req, res) {
-  var filter, productList;
-  return regeneratorRuntime.async(function _callee6$(_context6) {
-    while (1) {
-      switch (_context6.prev = _context6.next) {
-        case 0:
-          filter = {};
+          return _context4.abrupt("return", res.status(200).send({
+            message: 'The user not found'
+          }));
 
-          if (req.query.category) {
-            filter = {
-              category: req.query.category.split(',')
-            };
-          }
-
-          console.log('filter:' + filter);
-          _context6.next = 5;
-          return regeneratorRuntime.awrap(Product.find(filter).populate('category'));
-
-        case 5:
-          productList = _context6.sent;
-
-          if (!productList) {
-            res.status(500).json({
-              success: false
+        case 6:
+          if (user && bcryptjs.compareSync(req.body.password, user.passwordHash)) {
+            token = jwt.sign({
+              userId: user.id,
+              isAdmin: user.isAdmin
+            }, secret, {
+              algorithm: 'HS256'
+            }, {
+              expiresIn: '1d'
+            });
+            res.status(200).send({
+              message: 'token',
+              user: user.email,
+              token: token
             });
           } else {
-            res.send({
-              prodocts: productList
+            res.status(200).send({
+              message: 'pass is wrong'
             });
           }
 
         case 7:
         case "end":
-          return _context6.stop();
+          return _context4.stop();
       }
     }
   });
