@@ -1,26 +1,16 @@
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router
-} from "@angular/router";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from "./auth.service";
+@Component({
+  selector: 'app-authentication',
+  templateUrl: "./authentication.component.html",
+  styles: [
+  ]
+})
+export class AuthenticationComponent implements OnInit {
 
-@Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor() { }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> {
-    const isAuth = this.authService.getIsAuth();
-    if (!isAuth) {
-      this.router.navigate(['/login']);
-    }
-    return isAuth;
+  ngOnInit(): void {
   }
+
 }

@@ -1,26 +1,25 @@
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router
-} from "@angular/router";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthService } from "./auth.service";
+import { AuthenticationComponent } from './authentication.component';
 
-@Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+describe('AuthenticationComponent', () => {
+  let component: AuthenticationComponent;
+  let fixture: ComponentFixture<AuthenticationComponent>;
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean | Observable<boolean> | Promise<boolean> {
-    const isAuth = this.authService.getIsAuth();
-    if (!isAuth) {
-      this.router.navigate(['/login']);
-    }
-    return isAuth;
-  }
-}
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ AuthenticationComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AuthenticationComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
