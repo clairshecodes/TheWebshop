@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { FormsModule } from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import { LogInService } from 'src/app/services/log-in.service';
 
