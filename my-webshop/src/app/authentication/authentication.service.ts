@@ -7,6 +7,9 @@ import { AuthData } from "./authentication-data.model";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
+  getAuthenticationStatusListener() {
+    throw new Error("Method not implemented.");
+  }
   private isAuthenticated = false;
   private token: string;
   private tokenTimer: any;
