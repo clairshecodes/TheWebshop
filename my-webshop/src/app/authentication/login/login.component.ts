@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
 
-import { AuthService } from "../auth.service";
+import { AuthService } from "../authentication.service";
 
 @Component({
   templateUrl: "./login.component.html",
@@ -10,7 +10,7 @@ import { AuthService } from "../auth.service";
 export class LoginComponent {
   isLoading = false;
 
-  constructor(public authService: AuthService) {}
+  constructor(public authenticationService: AuthenticationService) {}
 
   onLogin(form: NgForm) {
     if (form.invalid) {
