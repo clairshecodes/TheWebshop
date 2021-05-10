@@ -12,7 +12,10 @@
       <br>
       <button type="button" (click)="incrementInCart(item)" style="color:black" ><i class="glyphicon glyphicon-plus" aria-hidden="true"></i></button>
       <span>Amount of Items: {{item.qnt}} </span>
+      <button type="button" (click)="decrementInCart(item)"class="btn" style="color:black"><i class="glyphicon glyphicon-minus" aria-hidden="true"></i></button>
+      <br>
       <button type="button" (click)="removeFromCart(item)"class="btn" style="color:black"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></button>
+      <br>
       </div>
     </div>
   </div>

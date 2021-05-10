@@ -24,7 +24,6 @@ export class PaymentComponent implements OnInit {
   onAdd(postData: { navn: string; kortnummer: number, gyldig: number, kontrolcifre : number }) {
     // Send Http request
     console.log(postData);
-    console.log("Start");
     this.http
       .post(
         'https://webshop-dtu-default-rtdb.firebaseio.com/checkout.json',
@@ -33,7 +32,6 @@ export class PaymentComponent implements OnInit {
       .subscribe(responseData => {
         console.log(responseData);
       });
-      console.log("end");
   }
  
 
@@ -43,5 +41,4 @@ export class PaymentComponent implements OnInit {
       console.log(posts);
     });
   }
-
 }

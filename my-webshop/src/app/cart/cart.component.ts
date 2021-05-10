@@ -24,6 +24,10 @@ export class CartComponent implements OnInit {
     this.cartService.removeFromCart(product);
     window.alert('Item has been removed');
   }
+  decrementInCart(product){
+    this.cartService.decrementInCart(product);
+    window.alert('Product is deleted from cart');
+  }
 
   constructor(private cartService: CartService) { }
 

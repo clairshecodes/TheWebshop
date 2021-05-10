@@ -9,4 +9,19 @@ export class ProductService{
       getProduct(){
           return this.products.slice();
       }
+        //Increasing the amount of items
+  inc(item) {
+    //console.log(i);
+    if (item.qnt !== 5) {
+      item.qnt += 1;
+    }
+  }
+
+  //Decresing the amount of items
+  dec(item) {
+    //console.log(i);
+    if (item.qnt !== 1) {
+      item.qnt -= 1;
+    }
+  }
 }
