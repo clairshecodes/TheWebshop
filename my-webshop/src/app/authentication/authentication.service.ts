@@ -3,10 +3,10 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 
-import { AuthData } from "./auth-data.model";
+import { AuthData } from "./authentication-data.model";
 
 @Injectable({ providedIn: "root" })
-export class AuthService {
+export class AuthenticationService {
   private isAuthenticated = false;
   private token: string;
   private tokenTimer: any;

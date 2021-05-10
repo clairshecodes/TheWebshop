@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
 
-import { AuthService } from "../authentication.service";
+import { AuthenticationService } from "../authentication.service";
 
 @Component({
   templateUrl: "./login.component.html",
@@ -17,6 +17,6 @@ export class LoginComponent {
       return;
     }
     this.isLoading = true;
-    this.authService.login(form.value.email, form.value.password);
+    this.authenticationService.login(form.value.email, form.value.password);
   }
 }
