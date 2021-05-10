@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+import { LogInService } from 'src/app/services/log-in.service';
 
 
 @Component({
@@ -18,26 +19,15 @@ export class LogInComponent implements OnInit {
 
   // in here we initialize our form
   ngOnInit() {
-    this.fetchPosts();
+    this.logInService.fetchPosts();
   }
 
-  constructor(private http: HttpClient) {}
-  
-  onSubmit(postData) {
-    this.http
-      .post(
-        'https://webshop-dtu-default-rtdb.firebaseio.com/posts.json',
-        postData
-      )
-      .subscribe(responseData => {
-        console.log(responseData);
-      });
-  }
+  constructor(private http: HttpClient, private logInService: LogInService) {}
 
-  private fetchPosts(){
-    this.http.get('https://webshop-dtu-default-rtdb.firebaseio.com/posts.json')
-    .subscribe(posts => {
-      console.log(posts);
-    });
+  onSubmit(postData){
+    this.logInService.onSubmit(postData);
+  }
+  fetchPosts(){
+    this.logInService.fetchPosts();
   }
 }

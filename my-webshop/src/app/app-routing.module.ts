@@ -20,7 +20,8 @@ const appRoutes: Routes = [
   {path: 'authentication', component: AuthenticationComponent},
   {path: 'shipping', component: CheckoutComponent},
   {path: 'confirmation', component: ConfirmationComponent},
-  {path: 'Cart', component: CartComponent}
+  {path: 'Cart', component: CartComponent},
+ 
 ];
 
 @NgModule({

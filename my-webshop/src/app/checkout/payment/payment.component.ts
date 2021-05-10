@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { PaymentService } from 'src/app/services/payment.service';
 
 
 @Component({
@@ -13,32 +14,19 @@ export class PaymentComponent implements OnInit {
     return this.cartService.total();
   }
   
-  constructor(private cartService: CartService, private http: HttpClient) { 
+  constructor(private cartService: CartService, private http: HttpClient, private paymentService: PaymentService) { 
 
   }
   ngOnInit() {
     console.log("Start");
-    this.fetchPosts();
+    this.paymentService.fetchPosts();
     console.log("Stop");
   }
-  onAdd(postData: { navn: string; kortnummer: number, gyldig: number, kontrolcifre : number }) {
-    // Send Http request
-    console.log(postData);
-    this.http
-      .post(
-        'https://webshop-dtu-default-rtdb.firebaseio.com/checkout.json',
-        postData
-      )
-      .subscribe(responseData => {
-        console.log(responseData);
-      });
-  }
  
-
-  private fetchPosts(){
-    this.http.get('https://webshop-dtu-default-rtdb.firebaseio.com/checkout.json')
-    .subscribe(posts => {
-      console.log(posts);
-    });
+  onAdd(postData){
+    this.paymentService.onAdd(postData);
+  }
+  fetchPosts(){
+    this.paymentService.fetchPosts();
   }
 }
