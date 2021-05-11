@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { PaymentService } from 'src/app/services/payment.service';
 
 
@@ -14,13 +13,11 @@ export class PaymentComponent implements OnInit {
     return this.cartService.total();
   }
   
-  constructor(private cartService: CartService, private http: HttpClient, private paymentService: PaymentService) { 
+  constructor(private cartService: CartService,  private paymentService: PaymentService) { 
 
   }
   ngOnInit() {
-    console.log("Start");
     this.paymentService.fetchPosts();
-    console.log("Stop");
   }
  
   onAdd(postData){

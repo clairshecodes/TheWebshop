@@ -23,6 +23,5 @@ import { Injectable } from '@angular/core';
         .subscribe(posts => {
           console.log(posts);
         });
-      }
-     
+      }   
 }
