@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {any} from 'codelyzer/util/function';
 import { HttpClient } from '@angular/common/http';
 
 

@@ -6,16 +6,6 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
- /* title = 'JaDes Webshop';
-  clothesName = 'Search';
 
-  characters = [
-    'Sweatshirt',
-    'Jackets',
-    'Dresses',
-    'Co-Ords'
-  ];
-  collapsed = true;
-  searchText = 'Search';*/
 
 }

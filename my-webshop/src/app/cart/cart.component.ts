@@ -22,7 +22,11 @@ export class CartComponent implements OnInit {
   //remove item from cart
   removeFromCart(product){
     this.cartService.removeFromCart(product);
-    window.alert('Item has been removed');
+    window.alert('Product removed from cart');
+  }
+  decrementInCart(product){
+    this.cartService.decrementInCart(product);
+
   }
 
   constructor(private cartService: CartService) { }
