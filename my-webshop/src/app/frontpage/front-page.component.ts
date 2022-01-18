@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class MainComponent implements OnInit {
+export class FrontPageComponent implements OnInit {
   myCoOrd:string = "assets/image/co-ord.jpg";
   myWhole:string = "assets/image/whole.jpg";
   constructor() { }

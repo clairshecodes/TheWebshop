@@ -4,15 +4,15 @@ import { ProductComponent } from './product/product.component';
 import{LogInComponent} from './authentication/log-in/log-in.component'
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartComponent } from './cart/cart.component';
-import { MainComponent } from './main/main.component';
+import { FrontPageComponent } from './frontpage/front-page.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { ConfirmationComponent } from './checkout/confirmation/confirmation.component';
 
 
 const appRoutes: Routes = [
-  {path: '', component: MainComponent },
-  {path: 'main', component: MainComponent },
+  {path: '', component: FrontPageComponent },
+  {path: 'main', component: FrontPageComponent },
   {path: 'product', component: ProductComponent},
   {path: 'checkout', component: CheckoutComponent},
   {path: 'login', component: LogInComponent},

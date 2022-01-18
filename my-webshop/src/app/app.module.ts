@@ -12,7 +12,7 @@ import { PaymentComponent } from './checkout/payment/payment.component';
 import { ConfirmationComponent } from './checkout/confirmation/confirmation.component';
 import {AppRoutingModule} from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MainComponent } from './main/main.component';
+import { FrontPageComponent } from './frontpage/front-page.component';
 import {FilterPipe} from './filter.pipe';
 
 
@@ -32,7 +32,7 @@ import { HeaderComponent } from './header/header.component';
     CheckoutComponent,
     PaymentComponent,
     ConfirmationComponent,
-    MainComponent,
+    FrontPageComponent,
     FilterPipe,
     HeaderComponent
   ],
