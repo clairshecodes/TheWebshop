@@ -17,12 +17,12 @@ import { Injectable } from '@angular/core';
             console.log(responseData);
           });
       }
-    
+
       fetchPosts(){
         this.http.get('https://webshop-dtu-default-rtdb.firebaseio.com/checkout.json')
         .subscribe(posts => {
           console.log(posts);
         });
       }
-     
+
 }
